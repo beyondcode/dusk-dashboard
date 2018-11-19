@@ -20,7 +20,8 @@ class App extends \Ratchet\App
      * @param string        $address    IP address to bind to. Default is localhost/proxy only. '0.0.0.0' for any machine.
      * @param LoopInterface $loop       Specific React\EventLoop to bind the application to. null will create one for you.
      */
-    public function __construct($httpHost = 'localhost', $port = 8080, $address = '127.0.0.1', LoopInterface $loop = null) {
+    public function __construct($httpHost = 'localhost', $port = 8080, $address = '127.0.0.1', LoopInterface $loop = null)
+    {
         if (null === $loop) {
             $loop = LoopFactory::create();
         }
@@ -28,9 +29,9 @@ class App extends \Ratchet\App
         $this->httpHost = $httpHost;
         $this->port = $port;
 
-        $socket = new Reactor($address . ':' . $port, $loop);
+        $socket = new Reactor($address.':'.$port, $loop);
 
-        $this->routes  = new RouteCollection;
+        $this->routes = new RouteCollection;
         $this->_server = new IoServer(new HttpServer(new Router(new UrlMatcher($this->routes, new RequestContext))), $socket, $loop);
 
         $policy = new FlashPolicy;

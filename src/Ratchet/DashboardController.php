@@ -3,9 +3,9 @@
 namespace BeyondCode\DuskDashboard\Ratchet;
 
 use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\RequestInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
+use Psr\Http\Message\RequestInterface;
 
 class DashboardController implements HttpServerInterface
 {
@@ -14,19 +14,19 @@ class DashboardController implements HttpServerInterface
      * @param  ConnectionInterface $conn The socket/connection that is closing/closed
      * @throws \Exception
      */
-    function onClose(ConnectionInterface $conn)
+    public function onClose(ConnectionInterface $conn)
     {
         // TODO: Implement onClose() method.
     }
 
     /**
      * If there is an error with one of the sockets, or somewhere in the application where an Exception is thrown,
-     * the Exception is sent back down the stack, handled by the Server and bubbled back up the application through this method
+     * the Exception is sent back down the stack, handled by the Server and bubbled back up the application through this method.
      * @param  ConnectionInterface $conn
      * @param  \Exception $e
      * @throws \Exception
      */
-    function onError(ConnectionInterface $conn, \Exception $e)
+    public function onError(ConnectionInterface $conn, \Exception $e)
     {
         // TODO: Implement onError() method.
     }
@@ -38,18 +38,17 @@ class DashboardController implements HttpServerInterface
      */
     public function onOpen(ConnectionInterface $conn, RequestInterface $request = null)
     {
-        $conn->send(\GuzzleHttp\Psr7\str(new Response(200, ['Content-Type' => 'text/html'], file_get_contents(__DIR__ . '/../../resources/views/index.html'))));
+        $conn->send(\GuzzleHttp\Psr7\str(new Response(200, ['Content-Type' => 'text/html'], file_get_contents(__DIR__.'/../../resources/views/index.html'))));
         $conn->close();
     }
 
     /**
-     * Triggered when a client sends data through the socket
+     * Triggered when a client sends data through the socket.
      * @param  \Ratchet\ConnectionInterface $from The socket/connection that sent the message to your application
      * @param  string $msg The message received
      * @throws \Exception
      */
-    function onMessage(ConnectionInterface $from, $msg)
+    public function onMessage(ConnectionInterface $from, $msg)
     {
-
     }
 }

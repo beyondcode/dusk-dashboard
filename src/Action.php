@@ -25,10 +25,8 @@ class Action
         return $this->html;
     }
 
-
     public function getArguments()
     {
         return $this->arguments;
     }
-
 }

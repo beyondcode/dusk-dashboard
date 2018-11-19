@@ -44,7 +44,7 @@ class BrowserActionCollector
 
     protected function pushAction(Action $action)
     {
-        /**
+        /*
          * @todo this needs to be passed from the
          * dashboard process to the actual dusk test runner.
          */
@@ -57,8 +57,8 @@ class BrowserActionCollector
                     'name' => $action->getName(),
                     'arguments' => $action->getArguments(),
                     'html' => $action->getHtml(),
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 }

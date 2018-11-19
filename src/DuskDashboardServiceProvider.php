@@ -2,7 +2,6 @@
 
 namespace BeyondCode\DuskDashboard;
 
-use Route;
 use Illuminate\Support\ServiceProvider;
 
 class DuskDashboardServiceProvider extends ServiceProvider

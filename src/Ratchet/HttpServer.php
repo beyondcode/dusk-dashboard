@@ -6,9 +6,9 @@ use Ratchet\Http\HttpServerInterface;
 
 class HttpServer extends \Ratchet\Http\HttpServer
 {
-    public function __construct(HttpServerInterface $component) {
+    public function __construct(HttpServerInterface $component)
+    {
         $this->_httpServer = $component;
-        $this->_reqParser  = new HttpRequestParser;
+        $this->_reqParser = new HttpRequestParser;
     }
-
 }

@@ -7,7 +7,6 @@ use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-
     /**
      * Create a new Browser instance.
      *

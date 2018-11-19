@@ -3,18 +3,20 @@
 namespace BeyondCode\DuskDashboard\Ratchet;
 
 use Ratchet\ConnectionInterface;
-use Ratchet\WebSocket\MessageComponentInterface;
 use Symfony\Component\Process\Process;
+use Ratchet\WebSocket\MessageComponentInterface;
 
 class Socket implements MessageComponentInterface
 {
     public static $connections = [];
 
-    public function onOpen(ConnectionInterface $conn) {
+    public function onOpen(ConnectionInterface $conn)
+    {
         self::$connections[] = $conn;
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) {
+    public function onMessage(ConnectionInterface $from, $msg)
+    {
         $data = json_decode($msg);
 
         if ($data->method === 'startTests') {
@@ -23,9 +25,11 @@ class Socket implements MessageComponentInterface
         }
     }
 
-    public function onClose(ConnectionInterface $conn) {
+    public function onClose(ConnectionInterface $conn)
+    {
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e) {
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
     }
 }
