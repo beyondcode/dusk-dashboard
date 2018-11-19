@@ -1,48 +1,48 @@
 <!doctype html>
-<html>
+<html class="h-full">
 <head>
     <!-- Meta Information -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
     <title>Dusk Dashboard</title>
 </head>
-<body class="h-100">
-<div id="dashboard">
-    <div class="container mb-5">
-        <div class="d-flex align-items-center py-4 header">
+<body class="h-full">
+<div id="dashboard" class="h-full">
+    <div class="h-full">
+        <div class="flex items-center p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%"><stop stop-color="#C7CECB" offset="0%"/><stop stop-color="#9CA5A0" offset="100%"/></linearGradient></defs><path fill="url(#a)" fill-rule="evenodd" d="M24 44a20 20 0 1 1 0-40 20 20 0 0 1 0 40zm9.7-10.17a13.97 13.97 0 0 0 2.88-4.18 14 14 0 0 1-18.5-18.5A14 14 0 1 0 33.7 33.83zm-14.14-5.65a16 16 0 0 0 12.29 4.66A12 12 0 0 1 14.9 15.89a16 16 0 0 0 4.66 12.29z"/></svg>
 
             <h4 class="mb-0 ml-3"><strong>Laravel</strong> Dusk Dashboard</h4>
 
 
-            <button class="btn btn-outline-primary ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
+            <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
                 Start Tests
             </button>
         </div>
-        <div class="row mt-4">
-            <div class="col-4" style="max-height: 80vh; overflow-x: hidden; overflow-y: scroll;">
-                <ul class="list-group">
-                    <li class="list-group-item" v-for="(events, test) in _.groupBy(events, 'test')">
-                        <h4 class="mb-1">{{ test }}</h4>
+        <div class="flex h-full">
+            <div class="static z-90 w-1/4">
+                <div class="block sticky ml-4">
+                    <ul class="list-reset">
+                        <li class="list-group-item" v-for="(events, test) in _.groupBy(events, 'test')">
+                            <p class="my-3 lg:mb-2 text-grey uppercase tracking-wide font-bold text-sm lg:text-xs">{{ test }}</p>
 
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" v-for="event in events" @mouseover="loadEvent(event)">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ event.name }}</h5>
-                                </div>
-                                <small>
-                                    <p v-for="arg in event.arguments" v-if="arg != ''">{{ arg }}</p>
-                                </small>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+                            <ul class="list-reset mr-4 font-mono text-xs">
+                                <li class="cursor-pointer bg-grey-light hover:bg-grey-lightest p-2 flex items-center" v-for="event in events" @mouseover="loadEvent(event)">
+                                    <span style="min-width: 180px;">{{ event.name }}</span>
+                                    <span>{{ event.arguments[0] || '' }}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col">
-                <iframe ref="iframe" id="iframe" frameborder="0" class="h-100 w-100"></iframe>
+            <div class="w-3/4 bg-grey h-full flex justify-center">
+                <div class="mt-4" style="width: 1000px; height: 660px;">
+                    <iframe ref="iframe" id="iframe" frameborder="0" class="h-full w-full block bg-white shadow-lg overflow-auto"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -51,9 +51,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
     var conn;
@@ -95,8 +92,10 @@
                     case 'click':
                         selector = event.arguments[0];
                         break;
+                    case 'select':
+                    case 'radio':
                     case 'type':
-                        selector = '#'+event.arguments[0]+', input[name="'+event.arguments[0]+'"], textarea[name="'+event.arguments[0]+'"]';
+                        selector = '#'+event.arguments[0]+', input[name="'+event.arguments[0]+'"], select[name="\'+event.arguments[0]+\'"], textarea[name="'+event.arguments[0]+'"]';
                         break;
                     case 'mouseover':
                         selector = event.arguments[0];
