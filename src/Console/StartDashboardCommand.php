@@ -7,13 +7,12 @@ use Ratchet\WebSocket\WsServer;
 use Symfony\Component\Routing\Route;
 use BeyondCode\DuskDashboard\Ratchet\App;
 use React\EventLoop\Factory as LoopFactory;
-use BeyondCode\DuskDashboard\Ratchet\Socket;
 use BeyondCode\DuskDashboard\Ratchet\Events;
+use BeyondCode\DuskDashboard\Ratchet\Socket;
 use BeyondCode\DuskDashboard\Ratchet\DashboardController;
 
 class StartDashboardCommand extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -45,7 +44,7 @@ class StartDashboardCommand extends Command
             $this->info('Started Dusk Dashboard on port '.$this->option('port'));
             $this->info('If the dashboard does not automatically open, visit: '.$dashboardUrl);
 
-            exec('open '. $dashboardUrl);
+            exec('open '.$dashboardUrl);
         });
 
         $socket = new Socket();
@@ -56,5 +55,4 @@ class StartDashboardCommand extends Command
         $app->routes->add('dashboard', new Route('/dashboard', ['_controller' => new DashboardController()], [], [], null, [], ['GET']));
         $app->run();
     }
-
 }
