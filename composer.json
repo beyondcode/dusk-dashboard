@@ -19,11 +19,11 @@
         "php": "^7.1",
         "cboden/ratchet": "^0.4.1",
         "guzzlehttp/guzzle": "^6.3",
-        "laravel/dusk": "^4.0",
-        "nunomaduro/larastan": "^0.3.8"
+        "laravel/dusk": "^4.0"
     },
     "require-dev": {
         "larapack/dd": "^1.0",
+        "nunomaduro/larastan": "^0.3.8",
         "phpunit/phpunit": "^7.0"
     },
     "autoload": {
