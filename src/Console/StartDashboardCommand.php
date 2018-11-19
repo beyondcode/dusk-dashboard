@@ -49,10 +49,10 @@ class StartDashboardCommand extends Command
 
         $socket = new Socket();
 
-        $app = new App($url['host'], $this->option('port'), '0.0.0.0', $loop);
+        $app = new App($url['host'], (int) $this->option('port'), '0.0.0.0', $loop);
         $app->route('/socket', new WsServer($socket), ['*']);
-        $app->routes->add('events', new Route('/events', ['_controller' => new Events()], [], [], null, [], ['POST']));
-        $app->routes->add('dashboard', new Route('/dashboard', ['_controller' => new DashboardController()], [], [], null, [], ['GET']));
+        $app->routes->add('events', new Route('/events', ['_controller' => new Events()], [], [], '', [], ['POST']));
+        $app->routes->add('dashboard', new Route('/dashboard', ['_controller' => new DashboardController()], [], [], '', [], ['GET']));
         $app->run();
     }
 }

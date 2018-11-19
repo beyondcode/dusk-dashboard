@@ -23,7 +23,9 @@ class Browser extends BaseBrowser
     }
 
     /**
-     * {@inheritdoc}
+     * @param  string $url
+     *
+     * @return  \BeyondCode\DuskDashboard\Browser
      */
     public function visit($url)
     {
