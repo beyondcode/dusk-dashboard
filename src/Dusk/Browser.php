@@ -7,7 +7,6 @@ use BeyondCode\DuskDashboard\BrowserActionCollector;
 
 class Browser
 {
-
     /** @var BaseBrowser */
     protected $browser;
 
