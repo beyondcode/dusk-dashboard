@@ -2,8 +2,8 @@
 
 namespace BeyondCode\DuskDashboard\Dusk;
 
-use BeyondCode\DuskDashboard\BrowserActionCollector;
 use Laravel\Dusk\Browser as BaseBrowser;
+use BeyondCode\DuskDashboard\BrowserActionCollector;
 
 class Browser extends BaseBrowser
 {
