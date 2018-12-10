@@ -10,13 +10,13 @@ class Browser
     /** @var BaseBrowser */
     protected $browser;
 
+    /** @var BrowserActionCollector */
+    protected $actionCollector;
+
     public function __construct(BaseBrowser $browser)
     {
         $this->browser = $browser;
     }
-
-    /** @var BrowserActionCollector */
-    protected $actionCollector;
 
     public function setActionCollector(BrowserActionCollector $collector)
     {
