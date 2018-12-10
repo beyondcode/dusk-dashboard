@@ -2,10 +2,10 @@
 
 namespace BeyondCode\DuskDashboard\Testing;
 
-use BeyondCode\DuskDashboard\Dusk\Browser;
-use BeyondCode\DuskDashboard\BrowserActionCollector;
 use Closure;
+use BeyondCode\DuskDashboard\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use BeyondCode\DuskDashboard\BrowserActionCollector;
 
 abstract class TestCase extends BaseTestCase
 {
