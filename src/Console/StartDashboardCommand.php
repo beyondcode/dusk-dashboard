@@ -5,10 +5,10 @@ namespace BeyondCode\DuskDashboard\Console;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
 use Symfony\Component\Routing\Route;
-use BeyondCode\DuskDashboard\Ratchet\Server\App;
 use React\EventLoop\Factory as LoopFactory;
-use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
 use BeyondCode\DuskDashboard\Ratchet\Socket;
+use BeyondCode\DuskDashboard\Ratchet\Server\App;
+use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
 use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
 
 class StartDashboardCommand extends Command

@@ -19,5 +19,4 @@ abstract class Controller implements HttpServerInterface
     public function onMessage(ConnectionInterface $from, $msg)
     {
     }
-
 }

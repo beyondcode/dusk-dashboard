@@ -2,16 +2,15 @@
 
 namespace BeyondCode\DuskDashboard\Ratchet\Http;
 
-use BeyondCode\DuskDashboard\Ratchet\Socket;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use Ratchet\ConnectionInterface;
-use Psr\Http\Message\RequestInterface;
 use function GuzzleHttp\Psr7\str;
+use Psr\Http\Message\RequestInterface;
+use BeyondCode\DuskDashboard\Ratchet\Socket;
 
 class EventController extends Controller
 {
-
     public function onOpen(ConnectionInterface $conn, RequestInterface $request = null)
     {
         try {
@@ -25,7 +24,6 @@ class EventController extends Controller
             }
 
             $conn->send(str(new Response(200)));
-
         } catch (Exception $e) {
             $conn->send(str(new Response(500, [], $e->getMessage())));
         }

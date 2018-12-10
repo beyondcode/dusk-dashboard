@@ -7,13 +7,12 @@ use Ratchet\Server\IoServer;
 use React\EventLoop\LoopInterface;
 use React\Socket\Server as Reactor;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 class App extends \Ratchet\App
 {
-
-    public function __construct($httpHost = 'localhost', $port = 8080, $address = '127.0.0.1', LoopInterface $loop)
+    public function __construct($httpHost, $port, $address, LoopInterface $loop)
     {
         $this->httpHost = $httpHost;
         $this->port = $port;
