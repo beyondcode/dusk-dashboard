@@ -5,33 +5,21 @@ namespace BeyondCode\DuskDashboard\Console;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
 use Symfony\Component\Routing\Route;
-use BeyondCode\DuskDashboard\Ratchet\App;
+use BeyondCode\DuskDashboard\Ratchet\Server\App;
 use React\EventLoop\Factory as LoopFactory;
-use BeyondCode\DuskDashboard\Ratchet\Events;
+use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
 use BeyondCode\DuskDashboard\Ratchet\Socket;
-use BeyondCode\DuskDashboard\Ratchet\DashboardController;
+use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
 
 class StartDashboardCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'dusk:dashboard {--port=6001}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Start the Laravel Dusk Dashboard';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
+    /** @var App */
+    protected $app;
+
     public function handle()
     {
         $url = parse_url(config('app.url'));
@@ -39,9 +27,10 @@ class StartDashboardCommand extends Command
         $loop = LoopFactory::create();
 
         $loop->futureTick(function () use ($url) {
-            $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard';
+            $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard?port='.$this->option('port');
 
             $this->info('Started Dusk Dashboard on port '.$this->option('port'));
+
             $this->info('If the dashboard does not automatically open, visit: '.$dashboardUrl);
 
             exec('open '.$dashboardUrl);
@@ -49,10 +38,23 @@ class StartDashboardCommand extends Command
 
         $socket = new Socket();
 
-        $app = new App($url['host'], $this->option('port'), '0.0.0.0', $loop);
-        $app->route('/socket', new WsServer($socket), ['*']);
-        $app->routes->add('events', new Route('/events', ['_controller' => new Events()], [], [], null, [], ['POST']));
-        $app->routes->add('dashboard', new Route('/dashboard', ['_controller' => new DashboardController()], [], [], null, [], ['GET']));
-        $app->run();
+        $this->app = new App($url['host'], $this->option('port'), '0.0.0.0', $loop);
+
+        $this->app->route('/socket', new WsServer($socket), ['*']);
+
+        $this->addRoutes();
+
+        $this->app->run();
+    }
+
+    protected function addRoutes()
+    {
+        $eventRoute = new Route('/events', ['_controller' => new EventController()], [], [], null, [], ['POST']);
+
+        $this->app->routes->add('events', $eventRoute);
+
+        $dashboardRoute = new Route('/dashboard', ['_controller' => new DashboardController()], [], [], null, [], ['GET']);
+
+        $this->app->routes->add('dashboard', $dashboardRoute);
     }
 }

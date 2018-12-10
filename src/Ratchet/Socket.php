@@ -10,9 +10,9 @@ class Socket implements MessageComponentInterface
 {
     public static $connections = [];
 
-    public function onOpen(ConnectionInterface $conn)
+    public function onOpen(ConnectionInterface $connection)
     {
-        self::$connections[] = $conn;
+        self::$connections[] = $connection;
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
@@ -20,16 +20,17 @@ class Socket implements MessageComponentInterface
         $data = json_decode($msg);
 
         if ($data->method === 'startTests') {
-            $proc = new Process('php artisan dusk', base_path());
-            $proc->start();
+            $process = new Process('php artisan dusk', base_path());
+
+            $process->start();
         }
     }
 
-    public function onClose(ConnectionInterface $conn)
+    public function onClose(ConnectionInterface $connection)
     {
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e)
+    public function onError(ConnectionInterface $connection, \Exception $e)
     {
     }
 }

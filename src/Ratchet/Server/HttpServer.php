@@ -1,6 +1,6 @@
 <?php
 
-namespace BeyondCode\DuskDashboard\Ratchet;
+namespace BeyondCode\DuskDashboard\Ratchet\Server;
 
 use Ratchet\Http\HttpServerInterface;
 
@@ -10,7 +10,6 @@ class HttpServer extends \Ratchet\Http\HttpServer
     {
         parent::__construct($component);
 
-        $this->_httpServer = $component;
-        $this->_reqParser = new HttpRequestParser;
+        $this->_reqParser->maxSize = 5242880;
     }
 }

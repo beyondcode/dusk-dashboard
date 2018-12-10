@@ -85,8 +85,8 @@
             },
 
             highlightEvent: function(event) {
-                var name = event.name;
-                var selector;
+                let name = event.name;
+                let selector;
 
                 switch (name) {
                     case 'click':
@@ -104,21 +104,27 @@
 
                 if (selector) {
                     try {
-                        document.getElementById('iframe').contentWindow.jQuery(selector).css('border', '5px solid red');
+                        document.getElementById('iframe')
+                            .contentWindow
+                            .jQuery(selector)
+                            .css('border', '5px solid red');
                     } catch (e) {}
                 }
             }
         },
 
         mounted: function() {
-            conn = new WebSocket('ws://'+window.location.hostname + ':6001/socket');
-            conn.onmessage = function(e) {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            conn = new WebSocket(`ws://${window.location.hostname}:${urlParams.get('port')}/socket`);
+
+            conn.onmessage = (e) => {
                 var message = JSON.parse(e.data);
                 if (message.name === 'dusk-event') {
                     this.events.push(message.data);
                     this.loadEvent(message.data);
                 }
-            }.bind(this);
+            };
         }
     });
 </script>
