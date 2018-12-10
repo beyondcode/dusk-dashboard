@@ -1,7 +1,9 @@
 <?php
 
-namespace BeyondCode\DuskDashboard;
+namespace BeyondCode\DuskDashboard\Testing;
 
+use BeyondCode\DuskDashboard\Dusk\Browser;
+use BeyondCode\DuskDashboard\BrowserActionCollector;
 use Closure;
 use Laravel\Dusk\TestCase as BaseTestCase;
 
@@ -11,7 +13,7 @@ abstract class TestCase extends BaseTestCase
      * Create a new Browser instance.
      *
      * @param  \Facebook\WebDriver\Remote\RemoteWebDriver  $driver
-     * @return \BeyondCode\DuskDashboard\Browser
+     * @return \BeyondCode\DuskDashboard\Dusk\Browser
      */
     protected function newBrowser($driver)
     {
