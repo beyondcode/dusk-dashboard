@@ -16,10 +16,11 @@ class BrowserActionCollector
     public function __construct($testName)
     {
         $this->testName = $testName;
+
         $this->client = new Client();
     }
 
-    public function collect($action, $arguments, $state)
+    public function collect(string $action, array $arguments, string $state)
     {
         $action = new Action($action, $arguments, $state);
 
