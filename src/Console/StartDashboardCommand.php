@@ -27,7 +27,7 @@ class StartDashboardCommand extends Command
         $loop = LoopFactory::create();
 
         $loop->futureTick(function () use ($url) {
-            $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard?port='.$this->option('port');
+            $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard';
 
             $this->info('Started Dusk Dashboard on port '.$this->option('port'));
 

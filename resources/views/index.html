@@ -114,9 +114,7 @@
         },
 
         mounted: function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            conn = new WebSocket(`ws://${window.location.hostname}:${urlParams.get('port')}/socket`);
+            conn = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/socket`);
 
             conn.onmessage = (e) => {
                 var message = JSON.parse(e.data);
