@@ -36,10 +36,6 @@ class BrowserActionCollector
 
     protected function pushAction(Action $action)
     {
-        /*
-         * @todo this needs to be passed from the
-         * dashboard process to the actual dusk test runner.
-         */
         $this->client->post('http://127.0.0.1:6001/events', [
             RequestOptions::JSON => [
                 'channel' => 'dusk-dashboard',

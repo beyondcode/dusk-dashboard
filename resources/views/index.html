@@ -206,6 +206,11 @@
                     this.events[(this.events.length -1 )].failure = message.data.message;
                     this.failures.push(this.events[(this.events.length -1 )]);
                 }
+
+                if (message.name === 'dusk-reset') {
+                    this.events = [];
+                    this.failures = [];
+                }
             };
         }
     });

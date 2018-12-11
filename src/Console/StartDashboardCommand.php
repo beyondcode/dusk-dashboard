@@ -2,8 +2,14 @@
 
 namespace BeyondCode\DuskDashboard\Console;
 
+use BeyondCode\DuskDashboard\Watcher;
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
+use React\EventLoop\LoopInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Routing\Route;
 use React\EventLoop\Factory as LoopFactory;
 use BeyondCode\DuskDashboard\Ratchet\Socket;
@@ -20,13 +26,16 @@ class StartDashboardCommand extends Command
     /** @var App */
     protected $app;
 
+    /** @var LoopInterface */
+    protected $loop;
+
     public function handle()
     {
         $url = parse_url(config('app.url'));
 
-        $loop = LoopFactory::create();
+        $this->loop = LoopFactory::create();
 
-        $loop->futureTick(function () use ($url) {
+        $this->loop->futureTick(function () use ($url) {
             $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard';
 
             $this->info('Started Dusk Dashboard on port '.$this->option('port'));
@@ -36,15 +45,9 @@ class StartDashboardCommand extends Command
             exec('open '.$dashboardUrl);
         });
 
-        $socket = new Socket();
+        $this->createTestWatcher();
 
-        $this->app = new App($url['host'], $this->option('port'), '0.0.0.0', $loop);
-
-        $this->app->route('/socket', new WsServer($socket), ['*']);
-
-        $this->addRoutes();
-
-        $this->app->run();
+        $this->createApp($url);
     }
 
     protected function addRoutes()
@@ -56,5 +59,46 @@ class StartDashboardCommand extends Command
         $dashboardRoute = new Route('/dashboard', ['_controller' => new DashboardController()], [], [], null, [], ['GET']);
 
         $this->app->routes->add('dashboard', $dashboardRoute);
+    }
+
+    protected function createTestWatcher()
+    {
+        $finder = (new Finder)
+            ->name('*.php')
+            ->files()
+            ->in($this->getTestSuitePath());
+
+        (new Watcher($finder, $this->loop))->startWatching(function() {
+
+            $process = new Process('php artisan dusk', base_path());
+
+            $process->start();
+        });
+    }
+
+    protected function getTestSuitePath()
+    {
+        $xml = simplexml_load_file(base_path('phpunit.dusk.xml'));
+
+        $directories = [];
+
+        foreach ($xml->testsuites->testsuite as $testsuite) {
+            $directories[] = (string)$testsuite->directory;
+        }
+
+        return $directories;
+    }
+
+    protected function createApp(array $url)
+    {
+        $socket = new Socket();
+
+        $this->app = new App($url['host'], $this->option('port'), '0.0.0.0', $this->loop);
+
+        $this->app->route('/socket', new WsServer($socket), ['*']);
+
+        $this->addRoutes();
+
+        $this->app->run();
     }
 }
