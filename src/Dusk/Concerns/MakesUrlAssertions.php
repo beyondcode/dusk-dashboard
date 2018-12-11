@@ -4,7 +4,7 @@ namespace BeyondCode\DuskDashboard\Dusk\Concerns;
 
 trait MakesUrlAssertions
 {
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertUrlIs($url)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -12,7 +12,7 @@ trait MakesUrlAssertions
         return parent::assertUrlIs($url);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSchemeIs($scheme)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -20,7 +20,7 @@ trait MakesUrlAssertions
         return parent::assertSchemeIs($scheme);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSchemeIsNot($scheme)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -28,7 +28,7 @@ trait MakesUrlAssertions
         return parent::assertSchemeIsNot($scheme);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertHostIs($host)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -36,7 +36,7 @@ trait MakesUrlAssertions
         return parent::assertHostIs($host);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertHostIsNot($host)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -44,7 +44,7 @@ trait MakesUrlAssertions
         return parent::assertHostIsNot($host);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPortIs($port)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -52,7 +52,7 @@ trait MakesUrlAssertions
         return parent::assertPortIs($port);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPortIsNot($port)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -60,7 +60,7 @@ trait MakesUrlAssertions
         return parent::assertPortIsNot($port);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPathIs($path)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -68,7 +68,7 @@ trait MakesUrlAssertions
         return parent::assertPathIs($path);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPathBeginsWith($path)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -76,7 +76,7 @@ trait MakesUrlAssertions
         return parent::assertPathBeginsWith($path);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPathIsNot($path)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -84,7 +84,7 @@ trait MakesUrlAssertions
         return parent::assertPathIsNot($path);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertFragmentIs($fragment)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -92,7 +92,7 @@ trait MakesUrlAssertions
         return parent::assertFragmentIs($fragment);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertFragmentBeginsWith($fragment)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -100,7 +100,7 @@ trait MakesUrlAssertions
         return parent::assertFragmentBeginsWith($fragment);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertFragmentIsNot($fragment)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -108,7 +108,7 @@ trait MakesUrlAssertions
         return parent::assertFragmentIsNot($fragment);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertRouteIs($route, $parameters = [])
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -116,7 +116,7 @@ trait MakesUrlAssertions
         return parent::assertRouteIs($route, $parameters);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertQueryStringHas($name, $value = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -124,7 +124,7 @@ trait MakesUrlAssertions
         return parent::assertQueryStringHas($name, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertQueryStringMissing($name)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -132,7 +132,7 @@ trait MakesUrlAssertions
         return parent::assertQueryStringMissing($name);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     protected function assertHasQueryStringParameter($name)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());

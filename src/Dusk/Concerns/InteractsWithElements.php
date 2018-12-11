@@ -4,7 +4,7 @@ namespace BeyondCode\DuskDashboard\Dusk\Concerns;
 
 trait InteractsWithElements
 {
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function elements($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -12,7 +12,7 @@ trait InteractsWithElements
         return parent::elements($selector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function element($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -20,8 +20,8 @@ trait InteractsWithElements
         return parent::element($selector);
     }
 
-    /** @inheritdoc */
-    public function clickLink($link, $element = "a")
+    /** {@inheritdoc} */
+    public function clickLink($link, $element = 'a')
     {
         $browser = parent::clickLink($link, $element);
 
@@ -30,7 +30,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function value($selector, $value = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -38,7 +38,7 @@ trait InteractsWithElements
         return parent::value($selector, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function text($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -46,7 +46,7 @@ trait InteractsWithElements
         return parent::text($selector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function attribute($selector, $attribute)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -54,7 +54,7 @@ trait InteractsWithElements
         return parent::attribute($selector, $attribute);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function keys($selector, ...$keys)
     {
         $browser = parent::keys($selector, $keys);
@@ -64,7 +64,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function type($field, $value)
     {
         $browser = parent::type($field, $value);
@@ -74,7 +74,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function append($field, $value)
     {
         $browser = parent::append($field, $value);
@@ -84,7 +84,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function clear($field)
     {
         $browser = parent::clear($field);
@@ -94,7 +94,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function select($field, $value = null)
     {
         $browser = parent::select($field, $value);
@@ -104,7 +104,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function radio($field, $value)
     {
         $browser = parent::radio($field, $value);
@@ -114,7 +114,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function check($field, $value = null)
     {
         $browser = parent::check($field, $value);
@@ -124,7 +124,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function uncheck($field, $value = null)
     {
         $browser = parent::uncheck($field, $value);
@@ -134,7 +134,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function attach($field, $path)
     {
         $browser = parent::attach($field, $path);
@@ -144,7 +144,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function press($button)
     {
         $browser = parent::press($button);
@@ -154,7 +154,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function pressAndWaitFor($button, $seconds = 5)
     {
         $browser = parent::pressAndWaitFor($button, $seconds);
@@ -164,7 +164,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function drag($from, $to)
     {
         $browser = parent::drag($from, $to);
@@ -174,7 +174,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dragUp($selector, $offset)
     {
         $browser = parent::dragUp($selector, $offset);
@@ -184,7 +184,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dragDown($selector, $offset)
     {
         $browser = parent::dragDown($selector, $offset);
@@ -194,7 +194,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dragLeft($selector, $offset)
     {
         $browser = parent::dragLeft($selector, $offset);
@@ -204,7 +204,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dragRight($selector, $offset)
     {
         $browser = parent::dragRight($selector, $offset);
@@ -214,7 +214,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dragOffset($selector, $x = 0, $y = 0)
     {
         $browser = parent::dragOffset($selector, $x, $y);
@@ -224,7 +224,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function acceptDialog()
     {
         $browser = parent::acceptDialog();
@@ -234,7 +234,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function typeInDialog($value)
     {
         $browser = parent::typeInDialog($value);
@@ -244,7 +244,7 @@ trait InteractsWithElements
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function dismissDialog()
     {
         $browser = parent::dismissDialog();

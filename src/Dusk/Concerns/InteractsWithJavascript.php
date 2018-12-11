@@ -4,7 +4,7 @@ namespace BeyondCode\DuskDashboard\Dusk\Concerns;
 
 trait InteractsWithJavascript
 {
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function script($scripts)
     {
         $result = parent::script($scripts);

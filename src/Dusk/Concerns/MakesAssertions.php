@@ -4,7 +4,7 @@ namespace BeyondCode\DuskDashboard\Dusk\Concerns;
 
 trait MakesAssertions
 {
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertTitle($title)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -12,7 +12,7 @@ trait MakesAssertions
         return parent::assertTitle($title);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertTitleContains($title)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -20,7 +20,7 @@ trait MakesAssertions
         return parent::assertTitleContains($title);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertHasCookie($name, $decrypt = true)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -28,7 +28,7 @@ trait MakesAssertions
         return parent::assertHasCookie($name, $decrypt);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertHasPlainCookie($name)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -36,7 +36,7 @@ trait MakesAssertions
         return parent::assertHasPlainCookie($name);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertCookieMissing($name, $decrypt = true)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -44,7 +44,7 @@ trait MakesAssertions
         return parent::assertCookieMissing($name, $decrypt);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPlainCookieMissing($name)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -52,7 +52,7 @@ trait MakesAssertions
         return parent::assertPlainCookieMissing($name);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertCookieValue($name, $value, $decrypt = true)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -60,7 +60,7 @@ trait MakesAssertions
         return parent::assertCookieValue($name, $value, $decrypt);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPlainCookieValue($name, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -68,7 +68,7 @@ trait MakesAssertions
         return parent::assertPlainCookieValue($name, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSeeIn($selector, $text)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -76,7 +76,7 @@ trait MakesAssertions
         return parent::assertSeeIn($selector, $text);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertDontSeeIn($selector, $text)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -84,7 +84,7 @@ trait MakesAssertions
         return parent::assertDontSeeLink($selector, $text);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSourceHas($code)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -92,7 +92,7 @@ trait MakesAssertions
         return parent::assertSourceHas($code);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSourceMissing($code)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -100,7 +100,7 @@ trait MakesAssertions
         return parent::assertSourceMissing($code);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSeeLink($link)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -108,7 +108,7 @@ trait MakesAssertions
         return parent::assertSeeLink($link);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertDontSeeLink($link)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -116,7 +116,7 @@ trait MakesAssertions
         return parent::assertDontSeeLink($link);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function seeLink($link)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -124,7 +124,7 @@ trait MakesAssertions
         return parent::seeLink($link);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertInputValue($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -132,7 +132,7 @@ trait MakesAssertions
         return parent::assertInputValue($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertInputValueIsNot($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -140,7 +140,7 @@ trait MakesAssertions
         return parent::assertInputValueIsNot($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function inputValue($field)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -148,7 +148,7 @@ trait MakesAssertions
         return parent::inputValue($field);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertChecked($field, $value = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -156,7 +156,7 @@ trait MakesAssertions
         return parent::assertChecked($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertNotChecked($field, $value = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -164,7 +164,7 @@ trait MakesAssertions
         return parent::assertNotChecked($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertRadioSelected($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -172,7 +172,7 @@ trait MakesAssertions
         return parent::assertRadioSelected($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertRadioNotSelected($field, $value = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -180,7 +180,7 @@ trait MakesAssertions
         return parent::assertRadioNotSelected($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSelected($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -188,7 +188,7 @@ trait MakesAssertions
         return parent::assertSelectHasOption($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertNotSelected($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -196,7 +196,7 @@ trait MakesAssertions
         return parent::assertNotSelected($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSelectHasOptions($field, array $values)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -204,7 +204,7 @@ trait MakesAssertions
         return parent::assertSelectHasOptions($field, $values);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSelectMissingOptions($field, array $values)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -212,19 +212,19 @@ trait MakesAssertions
         return parent::assertSelectMissingOptions($field, $values);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSelectHasOption($field, $value)
     {
         return $this->assertSelectHasOptions($field, [$value]);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSelectMissingOption($field, $value)
     {
         return $this->assertSelectMissingOptions($field, [$value]);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function selected($field, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -232,7 +232,7 @@ trait MakesAssertions
         return parent::select($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertValue($selector, $value)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -240,7 +240,7 @@ trait MakesAssertions
         return parent::assertValue($field, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertVisible($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -248,7 +248,7 @@ trait MakesAssertions
         return parent::assertVisible($selector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertPresent($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -256,7 +256,7 @@ trait MakesAssertions
         return parent::assertPresent($selector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertMissing($selector)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -264,7 +264,7 @@ trait MakesAssertions
         return parent::assertMissing($selector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertDialogOpened($message)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -272,7 +272,7 @@ trait MakesAssertions
         return parent::assertDialogOpened($message);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertEnabled($field)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -280,7 +280,7 @@ trait MakesAssertions
         return parent::assertEnabled($field);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertDisabled($field)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -288,7 +288,7 @@ trait MakesAssertions
         return parent::assertDisabled($field);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertFocused($field)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -296,7 +296,7 @@ trait MakesAssertions
         return parent::assertFocused($field);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertNotFocused($field)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -304,7 +304,7 @@ trait MakesAssertions
         return parent::assertNotFocused($field);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertVue($key, $value, $componentSelector = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -312,7 +312,7 @@ trait MakesAssertions
         return parent::assertVue($key, $value, $componentSelector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertVueIsNot($key, $value, $componentSelector = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -320,7 +320,7 @@ trait MakesAssertions
         return parent::assertVueIsNot($key, $value, $componentSelector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertVueContains($key, $value, $componentSelector = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -328,7 +328,7 @@ trait MakesAssertions
         return parent::assertVueContains($key, $value, $componentSelector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertVueDoesNotContain($key, $value, $componentSelector = null)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
@@ -336,7 +336,7 @@ trait MakesAssertions
         return parent::assertVueDoesNotContain($key, $value, $componentSelector);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function vueAttribute($componentSelector, $key)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
