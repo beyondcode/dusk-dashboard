@@ -3,12 +3,12 @@
 namespace BeyondCode\DuskDashboard\Testing;
 
 use Closure;
-use BeyondCode\DuskDashboard\Dusk\Browser;
+use Throwable;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use BeyondCode\DuskDashboard\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
-use Throwable;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -57,7 +57,7 @@ abstract class TestCase extends BaseTestCase
                 'channel' => 'dusk-dashboard',
                 'name' => 'dusk-failure',
                 'data' => [
-                    'message' => $t->getMessage()
+                    'message' => $t->getMessage(),
                 ],
             ],
         ]);
