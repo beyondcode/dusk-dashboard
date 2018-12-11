@@ -51,9 +51,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function onNotSuccessfulTest(Throwable $t)
     {
-        $client = new Client();
-
-        $client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
+        (new Client())->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
             RequestOptions::JSON => [
                 'channel' => 'dusk-dashboard',
                 'name' => 'dusk-failure',

@@ -18,11 +18,12 @@
     "require": {
         "php": "^7.1",
         "cboden/ratchet": "^0.4.1",
+        "clue/buzz-react": "^2.5",
         "guzzlehttp/guzzle": "^6.3",
-        "yosymfony/resource-watcher": "^1.2",
         "illuminate/console": "5.6.*|5.7.*",
         "illuminate/support": "5.6.*|5.7.*",
-        "laravel/dusk": "^4.0"
+        "laravel/dusk": "^4.0",
+        "yosymfony/resource-watcher": "^1.2"
     },
     "require-dev": {
         "larapack/dd": "^1.0",

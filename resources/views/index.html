@@ -25,8 +25,30 @@
         <div class="flex h-full w-full absolute pt-16 pin-t">
             <div class="w-1/4 h-full overflow-y-scroll">
                 <div class="block sticky ml-4">
+
+                    <div class="inline-flex mb-4 items-center justify-center w-full">
+                        <button @click="filter = null" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l" :class="{
+                            'bg-grey': filter === null,
+                            'bg-grey-light': filter !== null
+                        }">
+                            All ({{ _.size(groupedEvents) }})
+                        </button>
+                        <button @click="filter = 'success'" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-l border-r border-grey" :class="{
+                            'bg-grey': filter === 'success',
+                            'bg-grey-light': filter !== 'success'
+                        }">
+                            Success ({{ _.size(success) }})
+                        </button>
+                        <button @click="filter = 'failure'" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r" :class="{
+                            'bg-grey': filter === 'failure',
+                            'bg-grey-light': filter !== 'failure'
+                        }">
+                            Failures ({{ _.size(failures) }})
+                        </button>
+                    </div>
+
                     <ul class="list-reset">
-                        <li class="list-group-item" v-for="(events, test) in _.groupBy(events, 'test')">
+                        <li class="list-group-item" v-for="(events, test) in filteredEvents">
                             <p class="my-3 lg:mb-2 text-grey uppercase tracking-wide font-bold text-sm lg:text-xs" :class="{
                                                 'text-green-dark': ! events[events.length-1].failure,
                                                 'text-red-dark': events[events.length-1].failure,
@@ -55,6 +77,11 @@
                                         </div>
                                         <span style="min-width: 180px;">{{ event.name }}</span>
                                         <span>{{ event.arguments[0] || '' }}</span>
+                                    </div>
+                                    <div class="flex flex-col my-2" v-if="event === pinnedEvent && event.arguments.length > 1">
+                                        <div class="my-2" v-for="argument in event.arguments">
+                                            {{ argument }}
+                                        </div>
                                     </div>
                                     <div class="mt-2 w-full text-red-darker" v-if="event.failure">
                                         {{ event.failure }}
@@ -95,11 +122,38 @@
         el: '#dashboard',
 
         data: {
+            filter: null,
             activeEvent: {},
             hoveredEvent: null,
             pinnedEvent: null,
             events: [],
-            failures: [],
+        },
+
+        computed: {
+            groupedEvents: function() {
+                return _.groupBy(this.events, 'test');
+            },
+
+            filteredEvents: function() {
+                if (this.filter === 'failure') {
+                    return this.failures;
+                } else if (this.filter === 'success') {
+                    return this.success;
+                }
+                return this.groupedEvents;
+            },
+
+            failures: function() {
+                return _.pickBy(this.groupedEvents, (values, key) => {
+                    return values[values.length -1].failure;
+                });
+            },
+
+            success: function() {
+                return _.pickBy(this.groupedEvents, (values, key) => {
+                    return ! values[values.length -1].failure;
+                });
+            }
         },
 
         methods: {
@@ -125,7 +179,6 @@
 
             startTests: function() {
                 this.events = [];
-                this.failures = [];
 
                 conn.send(JSON.stringify({
                     method: 'startTests'
@@ -204,12 +257,10 @@
 
                 if (message.name === 'dusk-failure') {
                     this.events[(this.events.length -1 )].failure = message.data.message;
-                    this.failures.push(this.events[(this.events.length -1 )]);
                 }
 
                 if (message.name === 'dusk-reset') {
                     this.events = [];
-                    this.failures = [];
                 }
             };
         }

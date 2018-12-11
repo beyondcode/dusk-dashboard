@@ -2,6 +2,7 @@
 
 namespace BeyondCode\DuskDashboard\Console;
 
+use Clue\React\Buzz\Browser;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
 use React\EventLoop\LoopInterface;
@@ -69,6 +70,17 @@ class StartDashboardCommand extends Command
             ->in($this->getTestSuitePath());
 
         (new Watcher($finder, $this->loop))->startWatching(function () {
+            $client = new Browser($this->loop);
+
+            $client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
+                'Content-Type' => 'application/json'
+            ], json_encode([
+                    'channel' => 'dusk-dashboard',
+                    'name' => 'dusk-reset',
+                    'data' => [],
+                ])
+            );
+
             $process = new Process('php artisan dusk', base_path());
 
             $process->start();
