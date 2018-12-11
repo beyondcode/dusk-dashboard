@@ -2,15 +2,13 @@
 
 namespace BeyondCode\DuskDashboard\Console;
 
-use BeyondCode\DuskDashboard\Watcher;
-use GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Routing\Route;
+use BeyondCode\DuskDashboard\Watcher;
+use Symfony\Component\Process\Process;
 use React\EventLoop\Factory as LoopFactory;
 use BeyondCode\DuskDashboard\Ratchet\Socket;
 use BeyondCode\DuskDashboard\Ratchet\Server\App;
@@ -70,8 +68,7 @@ class StartDashboardCommand extends Command
             ->files()
             ->in($this->getTestSuitePath());
 
-        (new Watcher($finder, $this->loop))->startWatching(function() {
-
+        (new Watcher($finder, $this->loop))->startWatching(function () {
             $process = new Process('php artisan dusk', base_path());
 
             $process->start();
@@ -85,7 +82,7 @@ class StartDashboardCommand extends Command
         $directories = [];
 
         foreach ($xml->testsuites->testsuite as $testsuite) {
-            $directories[] = (string)$testsuite->directory;
+            $directories[] = (string) $testsuite->directory;
         }
 
         return $directories;

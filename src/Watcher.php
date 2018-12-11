@@ -28,14 +28,12 @@ class Watcher
 
         $watcher->setFinder($this->finder);
 
-        $this->loop->addPeriodicTimer(1 / 2, function() use ($watcher, $callback) {
-
+        $this->loop->addPeriodicTimer(1 / 2, function () use ($watcher, $callback) {
             $watcher->findChanges();
 
             if ($watcher->hasChanges()) {
                 call_user_func($callback);
             }
-
         });
     }
 }
