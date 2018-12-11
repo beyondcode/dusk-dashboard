@@ -10,20 +10,19 @@
     <title>Dusk Dashboard</title>
 </head>
 <body class="h-full">
-<div id="dashboard" class="h-full">
+<div id="dashboard" class="max-h-screen h-screen">
     <div class="h-full">
-        <div class="flex items-center p-2">
+        <div class="flex items-center h-16 px-2 w-full absolute pin-t" style="z-index: 900">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><defs><linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%"><stop stop-color="#C7CECB" offset="0%"/><stop stop-color="#9CA5A0" offset="100%"/></linearGradient></defs><path fill="url(#a)" fill-rule="evenodd" d="M24 44a20 20 0 1 1 0-40 20 20 0 0 1 0 40zm9.7-10.17a13.97 13.97 0 0 0 2.88-4.18 14 14 0 0 1-18.5-18.5A14 14 0 1 0 33.7 33.83zm-14.14-5.65a16 16 0 0 0 12.29 4.66A12 12 0 0 1 14.9 15.89a16 16 0 0 0 4.66 12.29z"/></svg>
 
             <h4 class="mb-0 ml-3"><strong>Laravel</strong> Dusk Dashboard</h4>
-
 
             <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
                 Start Tests
             </button>
         </div>
-        <div class="flex h-full">
-            <div class="static z-90 w-1/4">
+        <div class="flex h-full w-full absolute pt-16 pin-t">
+            <div class="w-1/4 h-full overflow-y-scroll">
                 <div class="block sticky ml-4">
                     <ul class="list-reset">
                         <li class="list-group-item" v-for="(events, test) in _.groupBy(events, 'test')">

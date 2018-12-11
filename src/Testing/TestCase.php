@@ -32,11 +32,16 @@ abstract class TestCase extends BaseTestCase
         $browsers = parent::createBrowsersFor($callback);
 
         foreach ($browsers as $browser) {
-            $browser->setActionCollector(new BrowserActionCollector($this->getName()));
+            $browser->setActionCollector(new BrowserActionCollector($this->getTestName()));
         }
 
         static::$browsers = $browsers;
 
         return static::$browsers;
+    }
+
+    protected function getTestName()
+    {
+        return class_basename(static::class) . '::' . $this->getName();
     }
 }
