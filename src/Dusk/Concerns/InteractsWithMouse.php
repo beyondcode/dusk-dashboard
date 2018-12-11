@@ -4,7 +4,7 @@ namespace BeyondCode\DuskDashboard\Dusk\Concerns;
 
 trait InteractsWithMouse
 {
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function moveMouse($xOffset, $yOffset)
     {
         $browser = parent::moveMouse($xOffset, $yOffset);
@@ -14,7 +14,7 @@ trait InteractsWithMouse
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function mouseover($selector)
     {
         $browser = parent::mouseover($selector);
@@ -24,7 +24,7 @@ trait InteractsWithMouse
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function click($selector = null)
     {
         $browser = parent::click($selector);
@@ -34,7 +34,7 @@ trait InteractsWithMouse
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function clickAndHold()
     {
         $browser = parent::clickAndHold();
@@ -53,7 +53,7 @@ trait InteractsWithMouse
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function rightClick($selector = null)
     {
         $browser = parent::rightClick($selector);
@@ -63,7 +63,7 @@ trait InteractsWithMouse
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function releaseMouse()
     {
         $browser = parent::releaseMouse();

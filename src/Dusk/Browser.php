@@ -41,7 +41,7 @@ class Browser extends \Laravel\Dusk\Browser
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function visitRoute($route, $parameters = [])
     {
         $browser = parent::visitRoute($route, $parameters);
@@ -51,7 +51,7 @@ class Browser extends \Laravel\Dusk\Browser
         return $browser;
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function refresh()
     {
         $browser = parent::refresh();
