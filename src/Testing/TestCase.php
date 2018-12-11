@@ -2,6 +2,7 @@
 
 namespace BeyondCode\DuskDashboard\Testing;
 
+use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
 use Closure;
 use Throwable;
 use GuzzleHttp\Client;
@@ -52,7 +53,7 @@ abstract class TestCase extends BaseTestCase
     {
         $client = new Client();
 
-        $client->post('http://127.0.0.1:6001/events', [
+        $client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
             RequestOptions::JSON => [
                 'channel' => 'dusk-dashboard',
                 'name' => 'dusk-failure',

@@ -2,6 +2,7 @@
 
 namespace BeyondCode\DuskDashboard;
 
+use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use BeyondCode\DuskDashboard\Dusk\Browser;
@@ -36,7 +37,7 @@ class BrowserActionCollector
 
     protected function pushAction(Action $action)
     {
-        $this->client->post('http://127.0.0.1:6001/events', [
+        $this->client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
             RequestOptions::JSON => [
                 'channel' => 'dusk-dashboard',
                 'name' => 'dusk-event',

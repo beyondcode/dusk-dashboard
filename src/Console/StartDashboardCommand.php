@@ -19,7 +19,9 @@ use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
 
 class StartDashboardCommand extends Command
 {
-    protected $signature = 'dusk:dashboard {--port=6001}';
+    const PORT = 9773;
+
+    protected $signature = 'dusk:dashboard';
 
     protected $description = 'Start the Laravel Dusk Dashboard';
 
@@ -36,9 +38,9 @@ class StartDashboardCommand extends Command
         $this->loop = LoopFactory::create();
 
         $this->loop->futureTick(function () use ($url) {
-            $dashboardUrl = 'http://'.$url['host'].':'.$this->option('port').'/dashboard';
+            $dashboardUrl = 'http://'.$url['host'].':'.self::PORT.'/dashboard';
 
-            $this->info('Started Dusk Dashboard on port '.$this->option('port'));
+            $this->info('Started Dusk Dashboard on port '.self::PORT);
 
             $this->info('If the dashboard does not automatically open, visit: '.$dashboardUrl);
 
@@ -93,7 +95,7 @@ class StartDashboardCommand extends Command
     {
         $socket = new Socket();
 
-        $this->app = new App($url['host'], $this->option('port'), '0.0.0.0', $this->loop);
+        $this->app = new App($url['host'], self::PORT, '0.0.0.0', $this->loop);
 
         $this->app->route('/socket', new WsServer($socket), ['*']);
 
