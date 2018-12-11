@@ -12,8 +12,6 @@ class BrowserActionCollector
 
     protected $testName;
 
-    protected $actions = [];
-
     public function __construct($testName)
     {
         $this->testName = $testName;
@@ -29,23 +27,11 @@ class BrowserActionCollector
 
         $action->setPreviousHtml($previousHtml);
 
-        $this->actions[] = $action;
-
         try {
             $this->pushAction($action);
         } catch (\Exception $e) {
             // Dusk-Dashboard Server might be turned off. No need to panic!
         }
-    }
-
-    public function getActions()
-    {
-        return $this->actions;
-    }
-
-    public function getTestName()
-    {
-        return $this->testName;
     }
 
     protected function pushAction(Action $action)
@@ -59,7 +45,7 @@ class BrowserActionCollector
                 'channel' => 'dusk-dashboard',
                 'name' => 'dusk-event',
                 'data' => [
-                    'test' => $this->getTestName(),
+                    'test' => $this->testName,
                     'path' => $action->getPath(),
                     'name' => $action->getName(),
                     'arguments' => $action->getArguments(),
