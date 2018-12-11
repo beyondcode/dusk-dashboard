@@ -2,21 +2,21 @@
 
 namespace BeyondCode\DuskDashboard\Dusk;
 
-use Laravel\Dusk\Browser as BaseBrowser;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
 
-class Browser
+class Browser extends \Laravel\Dusk\Browser
 {
-    /** @var BaseBrowser */
-    protected $browser;
+    use Concerns\InteractsWithAuthentication,
+        Concerns\InteractsWithCookies,
+        Concerns\InteractsWithElements,
+        Concerns\InteractsWithJavascript,
+        Concerns\InteractsWithMouse,
+        Concerns\MakesAssertions,
+        Concerns\MakesUrlAssertions,
+        Concerns\WaitsForElements;
 
     /** @var BrowserActionCollector */
     protected $actionCollector;
-
-    public function __construct(BaseBrowser $browser)
-    {
-        $this->browser = $browser;
-    }
 
     public function setActionCollector(BrowserActionCollector $collector)
     {
@@ -31,36 +31,55 @@ class Browser
         return $this->actionCollector;
     }
 
+    /** {@inheritdoc} */
+    public function visit($url)
+    {
+        $browser = parent::visit($url);
+
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+
+        return $browser;
+    }
+
+    /** @inheritdoc */
+    public function visitRoute($route, $parameters = [])
+    {
+        $browser = parent::visitRoute($route, $parameters);
+
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+
+        return $browser;
+    }
+
+    /** @inheritdoc */
+    public function refresh()
+    {
+        $browser = parent::refresh();
+
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+
+        return $browser;
+    }
+
     protected function getCurrentPageSource()
     {
-        $this->browser->ensurejQueryIsAvailable();
+        $this->ensurejQueryIsAvailable();
 
         $this->restoreHtml();
 
-        return $this->browser->driver->executeScript('return document.documentElement.innerHTML;');
-    }
-
-    public function __call(string $name, array $arguments)
-    {
-        $previousState = $this->getCurrentPageSource();
-
-        $result = call_user_func_array([$this->browser, $name], $arguments);
-
-        $this->actionCollector->collect($name, $arguments, $this->getCurrentPageSource());
-
-        return $result;
+        return $this->driver->executeScript('return document.documentElement.innerHTML;');
     }
 
     protected function restoreHtml()
     {
-        $this->browser->driver->executeScript("$('input').attr('value', function() { return $(this).val(); });");
+        $this->driver->executeScript("$('input').attr('value', function() { return $(this).val(); });");
 
-        $this->browser->driver->executeScript("$('input[type=checkbox]').each(function() { $(this).attr('checked', $(this).prop(\"checked\")); });");
+        $this->driver->executeScript("$('input[type=checkbox]').each(function() { $(this).attr('checked', $(this).prop(\"checked\")); });");
 
-        $this->browser->driver->executeScript("$('textarea').each(function() { $(this).html($(this).val()); });");
+        $this->driver->executeScript("$('textarea').each(function() { $(this).html($(this).val()); });");
 
-        $this->browser->driver->executeScript("$('input[type=radio]').each(function() { $(this).attr('checked', this.checked); });");
+        $this->driver->executeScript("$('input[type=radio]').each(function() { $(this).attr('checked', this.checked); });");
 
-        $this->browser->driver->executeScript("$('select option').each(function() { $(this).attr('selected', this.selected); });");
+        $this->driver->executeScript("$('select option').each(function() { $(this).attr('selected', this.selected); });");
     }
 }

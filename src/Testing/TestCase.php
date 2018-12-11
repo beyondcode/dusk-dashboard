@@ -3,7 +3,6 @@
 namespace BeyondCode\DuskDashboard\Testing;
 
 use Closure;
-use Laravel\Dusk\Browser as DuskBrowser;
 use BeyondCode\DuskDashboard\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
@@ -18,9 +17,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function newBrowser($driver)
     {
-        $duskBrowser = new DuskBrowser($driver);
-
-        return new Browser($duskBrowser);
+        return new Browser($driver);
     }
 
     /**
