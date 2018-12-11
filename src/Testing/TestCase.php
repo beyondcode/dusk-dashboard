@@ -45,7 +45,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function getTestName()
     {
-        return class_basename(static::class) . '::' . $this->getName();
+        return class_basename(static::class).'::'.$this->getName();
     }
 
     protected function onNotSuccessfulTest(Throwable $t)
