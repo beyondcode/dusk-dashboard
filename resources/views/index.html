@@ -159,7 +159,18 @@
                     case 'select':
                     case 'radio':
                     case 'type':
-                        selector = '#'+event.arguments[0]+', input[name="'+event.arguments[0]+'"], select[name="'+event.arguments[0]+'"], textarea[name="'+event.arguments[0]+'"]';
+                        selector = `#${event.arguments[0]},`;
+                        selector += `input[name="${event.arguments[0]}"],`;
+                        selector += `select[name="${event.arguments[0]}"],`;
+                        selector += `textarea[name="${event.arguments[0]}"]`;
+                        break;
+                    case 'press':
+                        selector = '';
+                        selector += `input[type=submit][name='${event.arguments[0]}'],`;
+                        selector += `input[type=submit][value='${event.arguments[0]}'],`;
+                        selector += `input[type=button][value='${event.arguments[0]}'],`;
+                        selector += `button[name='${event.arguments[0]}'],`;
+                        selector += `button:contains('${event.arguments[0]}')`;
                         break;
                     case 'mouseover':
                         selector = event.arguments[0];
