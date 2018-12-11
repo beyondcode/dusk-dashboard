@@ -43,18 +43,22 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function clickAndHold()
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::clickAndHold();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
 
     public function doubleClick()
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::doubleClick();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -62,9 +66,11 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function rightClick($selector = null)
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::rightClick($selector);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -72,9 +78,11 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function releaseMouse()
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::releaseMouse();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
