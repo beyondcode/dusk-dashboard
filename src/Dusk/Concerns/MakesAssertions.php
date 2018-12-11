@@ -68,7 +68,7 @@ trait MakesAssertions
         return parent::assertPlainCookieValue($name, $value);
     }
 
-    /** @inheritdoc */
+    /** {@inheritdoc} */
     public function assertSee($text)
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
