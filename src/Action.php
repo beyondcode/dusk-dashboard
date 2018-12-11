@@ -10,13 +10,19 @@ class Action
 
     protected $html;
 
-    public function __construct($name, $arguments, $html)
+    protected $previousHtml;
+
+    protected $path;
+
+    public function __construct(string $name, array $arguments, string $html, string $path)
     {
         $this->name = $name;
 
         $this->arguments = $arguments;
 
         $this->html = $html;
+
+        $this->path = $path;
     }
 
     public function getName()
@@ -29,8 +35,23 @@ class Action
         return $this->html;
     }
 
+    public function setPreviousHtml(?string $html)
+    {
+        $this->previousHtml = $html;
+    }
+
+    public function getPreviousHtml()
+    {
+        return $this->previousHtml;
+    }
+
     public function getArguments()
     {
         return $this->arguments;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
     }
 }

@@ -7,7 +7,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertUrlIs($url)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertUrlIs($url);
     }
@@ -15,7 +15,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertSchemeIs($scheme)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertSchemeIs($scheme);
     }
@@ -23,7 +23,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertSchemeIsNot($scheme)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertSchemeIsNot($scheme);
     }
@@ -31,7 +31,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertHostIs($host)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertHostIs($host);
     }
@@ -39,7 +39,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertHostIsNot($host)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertHostIsNot($host);
     }
@@ -47,7 +47,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertPortIs($port)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertPortIs($port);
     }
@@ -55,7 +55,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertPortIsNot($port)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertPortIsNot($port);
     }
@@ -63,7 +63,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertPathIs($path)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertPathIs($path);
     }
@@ -71,7 +71,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertPathBeginsWith($path)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertPathBeginsWith($path);
     }
@@ -79,7 +79,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertPathIsNot($path)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertPathIsNot($path);
     }
@@ -87,7 +87,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertFragmentIs($fragment)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertFragmentIs($fragment);
     }
@@ -95,7 +95,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertFragmentBeginsWith($fragment)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertFragmentBeginsWith($fragment);
     }
@@ -103,7 +103,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertFragmentIsNot($fragment)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertFragmentIsNot($fragment);
     }
@@ -111,7 +111,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertRouteIs($route, $parameters = [])
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertRouteIs($route, $parameters);
     }
@@ -119,7 +119,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertQueryStringHas($name, $value = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertQueryStringHas($name, $value);
     }
@@ -127,7 +127,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     public function assertQueryStringMissing($name)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertQueryStringMissing($name);
     }
@@ -135,7 +135,7 @@ trait MakesUrlAssertions
     /** {@inheritdoc} */
     protected function assertHasQueryStringParameter($name)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertHasQueryStringParameter($name);
     }

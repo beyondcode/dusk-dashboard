@@ -7,7 +7,7 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function elements($selector)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::elements($selector);
     }
@@ -15,7 +15,7 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function element($selector)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::element($selector);
     }
@@ -23,9 +23,11 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function clickLink($link, $element = 'a')
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::clickLink($link, $element);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -33,7 +35,7 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function value($selector, $value = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::value($selector, $value);
     }
@@ -41,7 +43,7 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function text($selector)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::text($selector);
     }
@@ -49,7 +51,7 @@ trait InteractsWithElements
     /** {@inheritdoc} */
     public function attribute($selector, $attribute)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::attribute($selector, $attribute);
     }
@@ -59,7 +61,7 @@ trait InteractsWithElements
     {
         $browser = parent::keys($selector, $keys);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -69,7 +71,7 @@ trait InteractsWithElements
     {
         $browser = parent::type($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -79,7 +81,7 @@ trait InteractsWithElements
     {
         $browser = parent::append($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -89,7 +91,7 @@ trait InteractsWithElements
     {
         $browser = parent::clear($field);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -99,7 +101,7 @@ trait InteractsWithElements
     {
         $browser = parent::select($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -109,7 +111,7 @@ trait InteractsWithElements
     {
         $browser = parent::radio($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -119,7 +121,7 @@ trait InteractsWithElements
     {
         $browser = parent::check($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -129,7 +131,7 @@ trait InteractsWithElements
     {
         $browser = parent::uncheck($field, $value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -139,7 +141,7 @@ trait InteractsWithElements
     {
         $browser = parent::attach($field, $path);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -149,7 +151,7 @@ trait InteractsWithElements
     {
         $browser = parent::press($button);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -159,7 +161,7 @@ trait InteractsWithElements
     {
         $browser = parent::pressAndWaitFor($button, $seconds);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -169,7 +171,7 @@ trait InteractsWithElements
     {
         $browser = parent::drag($from, $to);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -179,7 +181,7 @@ trait InteractsWithElements
     {
         $browser = parent::dragUp($selector, $offset);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -189,7 +191,7 @@ trait InteractsWithElements
     {
         $browser = parent::dragDown($selector, $offset);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -199,7 +201,7 @@ trait InteractsWithElements
     {
         $browser = parent::dragLeft($selector, $offset);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -209,7 +211,7 @@ trait InteractsWithElements
     {
         $browser = parent::dragRight($selector, $offset);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -219,7 +221,7 @@ trait InteractsWithElements
     {
         $browser = parent::dragOffset($selector, $x, $y);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -229,7 +231,7 @@ trait InteractsWithElements
     {
         $browser = parent::acceptDialog();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -239,7 +241,7 @@ trait InteractsWithElements
     {
         $browser = parent::typeInDialog($value);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -249,7 +251,7 @@ trait InteractsWithElements
     {
         $browser = parent::dismissDialog();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }

@@ -2,6 +2,7 @@
 
 namespace BeyondCode\DuskDashboard;
 
+use BeyondCode\DuskDashboard\Dusk\Browser;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
@@ -20,9 +21,13 @@ class BrowserActionCollector
         $this->client = new Client();
     }
 
-    public function collect(string $action, array $arguments, string $state)
+    public function collect(string $action, array $arguments, Browser $browser, string $previousHtml = null)
     {
-        $action = new Action($action, $arguments, $state);
+        $path = parse_url($browser->driver->getCurrentURL(), PHP_URL_PATH) ?? '';
+
+        $action = new Action($action, $arguments, $browser->getCurrentPageSource(), $path);
+
+        $action->setPreviousHtml($previousHtml);
 
         $this->actions[] = $action;
 
@@ -55,8 +60,10 @@ class BrowserActionCollector
                 'name' => 'dusk-event',
                 'data' => [
                     'test' => $this->getTestName(),
+                    'path' => $action->getPath(),
                     'name' => $action->getName(),
                     'arguments' => $action->getArguments(),
+                    'before' => $action->getPreviousHtml(),
                     'html' => $action->getHtml(),
                 ],
             ],

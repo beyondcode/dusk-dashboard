@@ -9,7 +9,7 @@ trait InteractsWithAuthentication
     {
         $browser = parent::login();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -19,7 +19,7 @@ trait InteractsWithAuthentication
     {
         $browser = parent::loginAs($userId, $guard);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -29,7 +29,7 @@ trait InteractsWithAuthentication
     {
         $browser = parent::logout($guard);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -37,7 +37,7 @@ trait InteractsWithAuthentication
     /** {@inheritdoc} */
     public function assertAuthenticated($guard = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertAuthenticated($guard);
     }
@@ -45,7 +45,7 @@ trait InteractsWithAuthentication
     /** {@inheritdoc} */
     public function assertGuest($guard = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertGuest($guard);
     }
@@ -53,7 +53,7 @@ trait InteractsWithAuthentication
     /** {@inheritdoc} */
     public function assertAuthenticatedAs($user, $guard = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::assertAuthenticatedAs($user, $guard);
     }

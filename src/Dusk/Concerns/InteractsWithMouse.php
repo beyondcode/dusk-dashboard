@@ -7,9 +7,11 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function moveMouse($xOffset, $yOffset)
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::moveMouse($xOffset, $yOffset);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -17,9 +19,11 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function mouseover($selector)
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::mouseover($selector);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -27,9 +31,11 @@ trait InteractsWithMouse
     /** {@inheritdoc} */
     public function click($selector = null)
     {
+        $previousHtml = $this->getCurrentPageSource();
+
         $browser = parent::click($selector);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this, $previousHtml);
 
         return $browser;
     }
@@ -39,7 +45,7 @@ trait InteractsWithMouse
     {
         $browser = parent::clickAndHold();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -48,7 +54,7 @@ trait InteractsWithMouse
     {
         $browser = parent::doubleClick();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -58,7 +64,7 @@ trait InteractsWithMouse
     {
         $browser = parent::rightClick($selector);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -68,7 +74,7 @@ trait InteractsWithMouse
     {
         $browser = parent::releaseMouse();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }

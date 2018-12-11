@@ -9,7 +9,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function whenAvailable($selector, Closure $callback, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::whenAvailable($selector, $callback, $seconds);
     }
@@ -17,7 +17,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitFor($selector, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitFor($selector, $seconds);
     }
@@ -25,7 +25,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitUntilMissing($selector, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitUntilMissing($selector, $seconds);
     }
@@ -33,7 +33,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForText($text, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForText($text, $seconds);
     }
@@ -41,7 +41,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForLink($link, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForLink($link, $seconds);
     }
@@ -49,7 +49,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForLocation($path, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForLocation($path, $seconds);
     }
@@ -57,7 +57,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForRoute($route, $parameters = [], $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForRoute($route, $parameters, $seconds);
     }
@@ -65,7 +65,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitUntil($script, $seconds = null, $message = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitUntil($script, $seconds, $message);
     }
@@ -73,7 +73,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForDialog($seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForDialog($seconds);
     }
@@ -81,7 +81,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitForReload($callback = null, $seconds = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitForReload($callback, $seconds);
     }
@@ -89,7 +89,7 @@ trait WaitsForElements
     /** {@inheritdoc} */
     public function waitUsing($seconds, $interval, Closure $callback, $message = null)
     {
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return parent::waitUsing($seconds, $interval, $callback, $message);
     }

@@ -36,7 +36,7 @@ class Browser extends \Laravel\Dusk\Browser
     {
         $browser = parent::visit($url);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -46,7 +46,7 @@ class Browser extends \Laravel\Dusk\Browser
     {
         $browser = parent::visitRoute($route, $parameters);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
@@ -56,12 +56,12 @@ class Browser extends \Laravel\Dusk\Browser
     {
         $browser = parent::refresh();
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $browser->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
     }
 
-    protected function getCurrentPageSource()
+    public function getCurrentPageSource()
     {
         $this->ensurejQueryIsAvailable();
 

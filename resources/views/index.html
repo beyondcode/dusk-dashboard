@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <title>Dusk Dashboard</title>
 </head>
@@ -26,12 +27,38 @@
                 <div class="block sticky ml-4">
                     <ul class="list-reset">
                         <li class="list-group-item" v-for="(events, test) in _.groupBy(events, 'test')">
-                            <p class="my-3 lg:mb-2 text-grey uppercase tracking-wide font-bold text-sm lg:text-xs">{{ test }}</p>
+                            <p class="my-3 lg:mb-2 text-grey uppercase tracking-wide font-bold text-sm lg:text-xs" :class="{
+                                                'text-green-dark': ! events[events.length-1].failure,
+                                                'text-red-dark': events[events.length-1].failure,
+                                            }">
+                                <i class="fa fa-check" :class="{
+                                                'text-green-dark fa-check': ! events[events.length-1].failure,
+                                                'text-red-dark fa-times': events[events.length-1].failure,
+                                            }"></i>
+                                {{ test }}
+                            </p>
 
                             <ul class="list-reset mr-4 font-mono text-xs">
-                                <li class="cursor-pointer bg-grey-light hover:bg-grey-lightest p-2 flex items-center" v-for="event in events" @mouseover="loadEvent(event)">
-                                    <span style="min-width: 180px;">{{ event.name }}</span>
-                                    <span>{{ event.arguments[0] || '' }}</span>
+                                <li class="cursor-pointer bg-grey-light hover:bg-grey-lightest p-2" v-for="(event, key) in events" @mouseover="hoverEvent(event)" @click="pinEvent(event)" :class="{
+                                    'bg-grey-lightest': event === pinnedEvent
+                                }">
+                                    <div class="flex items-center">
+                                        <div class="mr-2 flex items-center">
+                                            <div class="font-mono text-grey-dark pr-2" style="min-width: 25px;">
+                                                <i class="fa fa-thumbtack text-grey" v-if="event === hoveredEvent || event === pinnedEvent"></i>
+                                                <span v-else>{{ key+1 }}</span>
+                                            </div>
+                                            <i class="fa fa-check" :class="{
+                                                'text-green-dark fa-check': ! event.failure,
+                                                'text-red-dark fa-times': event.failure,
+                                            }"></i>
+                                        </div>
+                                        <span style="min-width: 180px;">{{ event.name }}</span>
+                                        <span>{{ event.arguments[0] || '' }}</span>
+                                    </div>
+                                    <div class="mt-2 w-full text-red-darker" v-if="event.failure">
+                                        {{ event.failure }}
+                                    </div>
                                 </li>
                             </ul>
                         </li>
@@ -39,8 +66,18 @@
                 </div>
             </div>
             <div class="w-3/4 bg-grey h-full flex justify-center">
-                <div class="mt-4" style="width: 1000px; height: 660px;">
-                    <iframe ref="iframe" id="iframe" frameborder="0" class="h-full w-full block bg-white shadow-lg overflow-auto"></iframe>
+                <div class="mt-4 flex flex-col shadow-lg" style="width: 1000px; height: 680px;">
+                    <div class="rounded-sm bg-grey-light p-2 h-12 justify-center items-center">
+                        <input type="text" class="focus:outline-none h-full w-full font-mono p-2" v-model="activeEvent.path" readonly>
+                    </div>
+                    <div class="h-full w-full flex flex-col">
+                        <iframe ref="iframe" id="iframe" frameborder="0" class="h-full w-full block bg-white overflow-auto"></iframe>
+                        <div class="flex bg-grey-dark text-white rounded-sm h-12 justify-center items-center text-center" v-if="activeEvent">
+                            <span class="mr-4">DOM Snapshot</span>
+                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-black border-grey-light shadow p-2 no-underline" href="#" @click="loadBefore">Before</a>
+                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-black border-grey-light shadow p-2 no-underline" href="#" @click="loadAfter">After</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,6 +85,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
 <script>
@@ -57,29 +95,57 @@
         el: '#dashboard',
 
         data: {
-            activeEvent: null,
-            events: []
+            activeEvent: {},
+            hoveredEvent: null,
+            pinnedEvent: null,
+            events: [],
+            failures: [],
         },
 
         methods: {
+            hoverEvent: function(event) {
+                this.hoveredEvent = event;
+            },
+
             loadEvent: function(event) {
                 if (this.activeEvent !== event) {
                     this.activeEvent = event;
-                    this.$refs.iframe.srcdoc = event.html;
+                    this.loadHtml(event.html);
+                }
+            },
 
-                    // Try to highlight DOM elements for this event
-                    setTimeout(function () {
-                        this.highlightEvent(event);
-                    }.bind(this), 50);
+            pinEvent: function(event) {
+                if (this.pinnedEvent === event) {
+                    this.pinnedEvent = null;
+                } else {
+                    this.pinnedEvent = event;
+                    this.loadEvent(event);
                 }
             },
 
             startTests: function() {
                 this.events = [];
+                this.failures = [];
 
                 conn.send(JSON.stringify({
                     method: 'startTests'
                 }));
+            },
+
+            loadBefore: function() {
+                this.loadHtml(this.activeEvent.before);
+            },
+
+            loadAfter: function() {
+                this.loadHtml(this.activeEvent.html);
+            },
+
+            loadHtml: function(html) {
+                this.$refs.iframe.srcdoc = html;
+
+                setTimeout(function () {
+                    this.highlightEvent(this.activeEvent);
+                }.bind(this), 50);
             },
 
             highlightEvent: function(event) {
@@ -93,7 +159,7 @@
                     case 'select':
                     case 'radio':
                     case 'type':
-                        selector = '#'+event.arguments[0]+', input[name="'+event.arguments[0]+'"], select[name="\'+event.arguments[0]+\'"], textarea[name="'+event.arguments[0]+'"]';
+                        selector = '#'+event.arguments[0]+', input[name="'+event.arguments[0]+'"], select[name="'+event.arguments[0]+'"], textarea[name="'+event.arguments[0]+'"]';
                         break;
                     case 'mouseover':
                         selector = event.arguments[0];
@@ -105,7 +171,7 @@
                         document.getElementById('iframe')
                             .contentWindow
                             .jQuery(selector)
-                            .css('border', '5px solid red');
+                            .css('outline', '5px solid red');
                     } catch (e) {}
                 }
             }
@@ -115,10 +181,19 @@
             conn = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/socket`);
 
             conn.onmessage = (e) => {
-                var message = JSON.parse(e.data);
+                let message = JSON.parse(e.data);
+
                 if (message.name === 'dusk-event') {
                     this.events.push(message.data);
-                    this.loadEvent(message.data);
+
+                    if (this.pinnedEvent === null) {
+                        this.loadEvent(message.data);
+                    }
+                }
+
+                if (message.name === 'dusk-failure') {
+                    this.events[(this.events.length -1 )].failure = message.data.message;
+                    this.failures.push(this.events[(this.events.length -1 )]);
                 }
             };
         }

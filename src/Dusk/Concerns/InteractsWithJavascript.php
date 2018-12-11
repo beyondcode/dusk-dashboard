@@ -9,7 +9,7 @@ trait InteractsWithJavascript
     {
         $result = parent::script($scripts);
 
-        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this->getCurrentPageSource());
+        $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $result;
     }
