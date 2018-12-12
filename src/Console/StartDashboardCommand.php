@@ -73,7 +73,7 @@ class StartDashboardCommand extends Command
             $client = new Browser($this->loop);
 
             $client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ], json_encode([
                     'channel' => 'dusk-dashboard',
                     'name' => 'dusk-reset',
