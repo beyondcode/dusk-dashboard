@@ -41,6 +41,8 @@ class StartDashboardCommand extends Command
 
             $this->info('Started Dusk Dashboard on port '.self::PORT);
 
+            $this->info('Your Dusk tests are now being watched.');
+
             $this->info('If the dashboard does not automatically open, visit: '.$dashboardUrl);
 
             exec('open '.$dashboardUrl);

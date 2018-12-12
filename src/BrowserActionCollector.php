@@ -9,6 +9,7 @@ use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
 
 class BrowserActionCollector
 {
+    /** @var Client */
     protected $client;
 
     protected $testName;
