@@ -3,7 +3,6 @@
 A beautiful dashboard for your Dusk test suites.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beyondcode/dusk-dashboard.svg?style=flat-square)](https://packagist.org/packages/beyondcode/dusk-dashboard)
-[![Build Status](https://img.shields.io/travis/beyondcode/dusk-dashboard/master.svg?style=flat-square)](https://travis-ci.org/beyondcode/dusk-dashboard)
 [![Quality Score](https://img.shields.io/scrutinizer/g/beyondcode/dusk-dashboard.svg?style=flat-square)](https://scrutinizer-ci.com/g/beyondcode/dusk-dashboard)
 [![Total Downloads](https://img.shields.io/packagist/dt/beyondcode/dusk-dashboard.svg?style=flat-square)](https://packagist.org/packages/beyondcode/dusk-dashboard)
 

@@ -73,23 +73,7 @@ class BrowserActionCollector
 
                 return data_get($log, 'params.requestId');
             })->map(function ($log) use ($browser) {
-                $request = $log[0];
-                $response = $log[1];
-
-                $url = parse_url(data_get($request, 'message.params.request.url'));
-
-                $this->pushAction('dusk-event', [
-                    'test' => $this->testName,
-                    'name' => 'XHR',
-                    'arguments' => [
-                        data_get($request, 'message.params.request.method').' '.
-                        $url['path'].' '.
-                        data_get($response, 'message.params.response.status').' '.
-                        data_get($response, 'message.params.response.statusText'),
-                    ],
-                    'html' => $browser->getCurrentPageSource(),
-                    'logs' => $log,
-                ]);
+                $this->pushPerformanceLog($log, $browser);
             });
     }
 
@@ -106,5 +90,26 @@ class BrowserActionCollector
         } catch (\Exception $e) {
             // Dusk-Dashboard Server might be turned off. No need to panic!
         }
+    }
+
+    protected function pushPerformanceLog(array $log, Browser $browser)
+    {
+        $request = $log[0];
+        $response = $log[1];
+
+        $url = parse_url(data_get($request, 'message.params.request.url'));
+
+        $this->pushAction('dusk-event', [
+            'test' => $this->testName,
+            'name' => 'XHR',
+            'arguments' => [
+                data_get($request, 'message.params.request.method').' '.
+                $url['path'].' '.
+                data_get($response, 'message.params.response.status').' '.
+                data_get($response, 'message.params.response.statusText'),
+            ],
+            'html' => $browser->getCurrentPageSource(),
+            'logs' => $log,
+        ]);
     }
 }
