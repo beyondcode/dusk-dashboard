@@ -3,6 +3,8 @@
 namespace BeyondCode\DuskDashboard\Testing;
 
 use Closure;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Throwable;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
@@ -49,16 +51,41 @@ abstract class TestCase extends BaseTestCase
         return class_basename(static::class).'::'.$this->getName();
     }
 
+    protected function enableNetworkLogging(DesiredCapabilities $capabilities) : DesiredCapabilities
+    {
+        $chromeOptions = $capabilities->getCapability(ChromeOptions::CAPABILITY);
+
+        $perfLoggingPrefs = new \stdClass();
+        $perfLoggingPrefs->enableNetwork = true;
+
+        $chromeOptions->setExperimentalOption('perfLoggingPrefs', $perfLoggingPrefs);
+
+        $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
+
+        $loggingPrefs = new \stdClass();
+        $loggingPrefs->browser = 'ALL';
+        $loggingPrefs->performance = 'ALL';
+
+        $capabilities->setCapability('loggingPrefs', $loggingPrefs);
+
+        return $capabilities;
+
+    }
+
     protected function onNotSuccessfulTest(Throwable $t)
     {
-        (new Client())->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
-            RequestOptions::JSON => [
-                'channel' => 'dusk-dashboard',
-                'name' => 'dusk-failure',
-                'data' => [
-                    'message' => $t->getMessage(),
+        try {
+            (new Client())->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
+                RequestOptions::JSON => [
+                    'channel' => 'dusk-dashboard',
+                    'name' => 'dusk-failure',
+                    'data' => [
+                        'message' => $t->getMessage(),
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        } catch (\Exception $e) {
+            // Dashboard is offline
+        }
     }
 }
