@@ -3,13 +3,13 @@
 namespace BeyondCode\DuskDashboard\Testing;
 
 use Closure;
-use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Throwable;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use BeyondCode\DuskDashboard\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
 use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
 
@@ -69,7 +69,6 @@ abstract class TestCase extends BaseTestCase
         $capabilities->setCapability('loggingPrefs', $loggingPrefs);
 
         return $capabilities;
-
     }
 
     protected function onNotSuccessfulTest(Throwable $t)
