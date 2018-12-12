@@ -91,12 +91,16 @@ class StartDashboardCommand extends Command
 
     protected function getTestSuitePath()
     {
-        $xml = simplexml_load_file(base_path('phpunit.dusk.xml'));
-
         $directories = [];
 
-        foreach ($xml->testsuites->testsuite as $testsuite) {
-            $directories[] = (string) $testsuite->directory;
+        if (file_exists(base_path('phpunit.dusk.xml'))) {
+            $xml = simplexml_load_file(base_path('phpunit.dusk.xml'));
+
+            foreach ($xml->testsuites->testsuite as $testsuite) {
+                $directories[] = (string) $testsuite->directory;
+            }
+        } else {
+            $directories[] = base_path('tests/Browser');
         }
 
         return $directories;
