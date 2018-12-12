@@ -73,7 +73,7 @@ class BrowserActionCollector
 
                 return data_get($log, 'params.requestId');
             })->map(function ($log) use ($browser) {
-                $this->pushPerformanceLog($log, $browser);
+                $this->pushPerformanceLog($log->toArray(), $browser);
             });
     }
 
