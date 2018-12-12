@@ -69,9 +69,9 @@ class BrowserActionCollector
                 if (data_get($log, 'message.method') === 'Network.requestWillBeSent') {
                     return data_get($log, 'message.requestId');
                 }
+
                 return data_get($log, 'params.requestId');
             })->map(function ($log) use ($browser) {
-
                 $request = $log[0];
                 $response = $log[1];
 
@@ -81,15 +81,15 @@ class BrowserActionCollector
                     'test' => $this->testName,
                     'name' => 'XHR',
                     'arguments' => [
-                        data_get($request, 'message.params.request.method') . ' ' .
-                        $url['path'] . ' ' .
-                        data_get($response, 'message.params.response.status') . ' ' .
-                        data_get($response, 'message.params.response.statusText')
+                        data_get($request, 'message.params.request.method').' '.
+                        $url['path'].' '.
+                        data_get($response, 'message.params.response.status').' '.
+                        data_get($response, 'message.params.response.statusText'),
                     ],
                     'html' => $browser->getCurrentPageSource(),
-                    'logs' => $log
+                    'logs' => $log,
                 ]);
-        });
+            });
     }
 
     protected function pushAction(string $name, array $payload)
