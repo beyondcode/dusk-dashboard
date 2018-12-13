@@ -4,6 +4,7 @@ namespace BeyondCode\DuskDashboard\Ratchet;
 
 use Ratchet\ConnectionInterface;
 use Symfony\Component\Process\Process;
+use Ratchet\RFC6455\Messaging\MessageInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
 
 class Socket implements MessageComponentInterface
@@ -15,7 +16,7 @@ class Socket implements MessageComponentInterface
         self::$connections[] = $connection;
     }
 
-    public function onMessage(ConnectionInterface $from, $msg)
+    public function onMessage(ConnectionInterface $from, MessageInterface $msg)
     {
         $data = json_decode($msg);
 
