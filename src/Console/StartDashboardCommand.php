@@ -45,7 +45,7 @@ class StartDashboardCommand extends Command
 
             $this->info('If the dashboard does not automatically open, visit: '.$dashboardUrl);
 
-            exec('open '.$dashboardUrl);
+            $this->tryToOpenInBrowser($dashboardUrl);
         });
 
         $this->createTestWatcher();
@@ -117,5 +117,12 @@ class StartDashboardCommand extends Command
         $this->addRoutes();
 
         $this->app->run();
+    }
+
+    protected function tryToOpenInBrowser($url)
+    {
+        if (PHP_OS === 'Darwin') {
+            exec('open '.$url);
+        }
     }
 }
