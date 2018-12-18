@@ -16,6 +16,17 @@ You can install the package via composer:
 composer require beyondcode/dusk-dashboard
 ```
 
+Next up, you need to go to your `DuskTestCase.php` that was installed by Laravel Dusk. You can find this file in your `tests` directory:
+
+Find and replace this line:
+```php
+use Laravel\Dusk\TestCase as BaseTestCase;
+```
+with:
+```php
+use BeyondCode\DuskDashboard\Testing\TestCase as BaseTestCase;
+```
+
 ## Usage
 
 ```
