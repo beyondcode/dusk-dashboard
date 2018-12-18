@@ -35,6 +35,10 @@ php artisan dusk:dashboard
 
 Check out the documentation [here](http://marcelpociot.de/blog/introducing-the-laravel-dusk-dashboard).
 
+### Handling Asset Paths
+
+Assets may not load or display properly when using relative paths due to port specification. Using Larvel's [Path Helpers](https://laravel.com/docs/5.7/helpers#available-methods) such as the `url()` and `asset()` helpers  (Ex: `{{ url('path/to/asset.css') }}`) will help overcome these pathing issues.
+
 ### Testing
 
 ``` bash
