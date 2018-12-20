@@ -85,6 +85,8 @@ abstract class TestCase extends BaseTestCase
             ]);
         } catch (\Exception $e) {
             // Dashboard is offline
+        } finally {
+            parent::onNotSuccessfulTest($t);
         }
     }
 }
