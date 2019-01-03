@@ -32,7 +32,7 @@ class StartDashboardCommand extends Command
 
     public function handle()
     {
-        $url = parse_url(config('app.url'));
+        $url = parse_url(config('dusk-dashboard.host', config('app.url')));
 
         $this->loop = LoopFactory::create();
 
