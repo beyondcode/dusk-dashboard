@@ -72,14 +72,14 @@ class Browser extends \Laravel\Dusk\Browser
 
     protected function restoreHtml()
     {
-        $this->driver->executeScript("$('input').attr('value', function() { return $(this).val(); });");
+        $this->driver->executeScript("jQuery('input').attr('value', function() { return jQuery(this).val(); });");
 
-        $this->driver->executeScript("$('input[type=checkbox]').each(function() { $(this).attr('checked', $(this).prop(\"checked\")); });");
+        $this->driver->executeScript("jQuery('input[type=checkbox]').each(function() { jQuery(this).attr('checked', jQuery(this).prop(\"checked\")); });");
 
-        $this->driver->executeScript("$('textarea').each(function() { $(this).html($(this).val()); });");
+        $this->driver->executeScript("jQuery('textarea').each(function() { jQuery(this).html(jQuery(this).val()); });");
 
-        $this->driver->executeScript("$('input[type=radio]').each(function() { $(this).attr('checked', this.checked); });");
+        $this->driver->executeScript("jQuery('input[type=radio]').each(function() { jQuery(this).attr('checked', this.checked); });");
 
-        $this->driver->executeScript("$('select option').each(function() { $(this).attr('selected', this.selected); });");
+        $this->driver->executeScript("jQuery('select option').each(function() { jQuery(this).attr('selected', this.selected); });");
     }
 }
