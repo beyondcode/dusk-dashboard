@@ -3,8 +3,8 @@
 namespace BeyondCode\DuskDashboard\Ratchet;
 
 use Ratchet\ConnectionInterface;
-use Symfony\Component\Process\Process;
 use Ratchet\RFC6455\Messaging\MessageInterface;
+use BeyondCode\DuskDashboard\DuskProcessFactory;
 use Ratchet\WebSocket\MessageComponentInterface;
 
 class Socket implements MessageComponentInterface
@@ -21,7 +21,7 @@ class Socket implements MessageComponentInterface
         $data = json_decode($msg);
 
         if ($data->method === 'startTests') {
-            $process = new Process('php artisan dusk', base_path());
+            $process = DuskProcessFactory::make();
 
             $process->start();
         }

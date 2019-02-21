@@ -9,9 +9,9 @@ use React\EventLoop\LoopInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Route;
 use BeyondCode\DuskDashboard\Watcher;
-use Symfony\Component\Process\Process;
 use React\EventLoop\Factory as LoopFactory;
 use BeyondCode\DuskDashboard\Ratchet\Socket;
+use BeyondCode\DuskDashboard\DuskProcessFactory;
 use BeyondCode\DuskDashboard\Ratchet\Server\App;
 use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
 use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
@@ -23,6 +23,18 @@ class StartDashboardCommand extends Command
     protected $signature = 'dusk:dashboard';
 
     protected $description = 'Start the Laravel Dusk Dashboard';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->ignoreValidationErrors();
+    }
 
     /** @var App */
     protected $app;
@@ -83,7 +95,7 @@ class StartDashboardCommand extends Command
                 ])
             );
 
-            $process = new Process('php artisan dusk', base_path());
+            $process = DuskProcessFactory::make();
 
             $process->start();
         });
