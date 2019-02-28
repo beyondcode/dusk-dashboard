@@ -13,7 +13,7 @@ A beautiful dashboard for your Dusk test suites.
 You can install the package via composer:
 
 ```bash
-composer require beyondcode/dusk-dashboard
+composer require beyondcode/dusk-dashboard --dev
 ```
 
 Next up, you need to go to your `DuskTestCase.php` that was installed by Laravel Dusk. You can find this file in your `tests` directory:
