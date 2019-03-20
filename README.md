@@ -16,6 +16,12 @@ You can install the package via composer:
 composer require beyondcode/dusk-dashboard --dev
 ```
 
+Then do the dusk install command to create the test files and folders:
+
+```bash
+php artisan dusk:install
+```
+
 Next up, you need to go to your `DuskTestCase.php` that was installed by Laravel Dusk. You can find this file in your `tests` directory:
 
 Find and replace this line:
