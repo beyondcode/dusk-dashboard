@@ -71,7 +71,7 @@ abstract class TestCase extends BaseTestCase
         return $capabilities;
     }
 
-    protected function onNotSuccessfulTest(Throwable $t)
+    protected function onNotSuccessfulTest(Throwable $t): void
     {
         try {
             (new Client())->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
