@@ -89,7 +89,7 @@ trait MakesAssertions
     {
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
-        return parent::assertDontSeeLink($selector, $text);
+        return parent::assertDontSeeIn($selector, $text);
     }
 
     /** {@inheritdoc} */
