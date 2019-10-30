@@ -86,7 +86,7 @@ class StartDashboardCommand extends Command
         (new Watcher($finder, $this->loop))->startWatching(function () {
             $client = new Browser($this->loop);
 
-            $client->post('http://127.0.0.1:'.StartDashboardCommand::PORT.'/events', [
+            $client->post('http://127.0.0.1:'.self::PORT.'/events', [
                 'Content-Type' => 'application/json',
             ], json_encode([
                     'channel' => 'dusk-dashboard',
