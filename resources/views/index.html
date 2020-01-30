@@ -18,7 +18,7 @@
 
             <h4 class="mb-0 ml-3"><strong>Laravel</strong> Dusk Dashboard</h4>
 
-            <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
+            <button class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
                 Start Tests
             </button>
         </div>
@@ -27,21 +27,21 @@
                 <div class="block sticky ml-4">
 
                     <div class="inline-flex mb-4 items-center justify-center w-full">
-                        <button @click="filter = null" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l" :class="{
-                            'bg-grey': filter === null,
-                            'bg-grey-light': filter !== null
+                        <button @click="filter = null" class="focus:outline-none hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded-l" :class="{
+                            'bg-gray-500': filter === null,
+                            'bg-gray-400': filter !== null
                         }">
                             All ({{ _.size(groupedEvents) }})
                         </button>
-                        <button @click="filter = 'success'" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-l border-r border-grey" :class="{
-                            'bg-grey': filter === 'success',
-                            'bg-grey-light': filter !== 'success'
+                        <button @click="filter = 'success'" class="focus:outline-none hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 border-l border-r border-gray-500" :class="{
+                            'bg-gray-500': filter === 'success',
+                            'bg-gray-400': filter !== 'success'
                         }">
                             Success ({{ _.size(success) }})
                         </button>
-                        <button @click="filter = 'failure'" class="focus:outline-none hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r" :class="{
-                            'bg-grey': filter === 'failure',
-                            'bg-grey-light': filter !== 'failure'
+                        <button @click="filter = 'failure'" class="focus:outline-none hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded-r" :class="{
+                            'bg-gray-500': filter === 'failure',
+                            'bg-gray-400': filter !== 'failure'
                         }">
                             Failures ({{ _.size(failures) }})
                         </button>
@@ -49,30 +49,30 @@
 
                     <ul class="list-reset">
                         <li class="list-group-item" v-for="(events, test) in filteredEvents">
-                            <p class="my-3 lg:mb-2 text-grey uppercase tracking-wide font-bold text-sm lg:text-xs" :class="{
-                                                'text-green-dark': ! events[events.length-1].failure,
-                                                'text-red-dark': events[events.length-1].failure,
+                            <p class="my-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs" :class="{
+                                                'text-green-600': ! events[events.length-1].failure,
+                                                'text-red-600': events[events.length-1].failure,
                                             }">
                                 <i class="fa fa-check" :class="{
-                                                'text-green-dark fa-check': ! events[events.length-1].failure,
-                                                'text-red-dark fa-times': events[events.length-1].failure,
+                                                'text-green-600 fa-check': ! events[events.length-1].failure,
+                                                'text-red-600 fa-times': events[events.length-1].failure,
                                             }"></i>
                                 {{ test }}
                             </p>
 
                             <ul class="list-reset mr-4 font-mono text-xs">
-                                <li class="cursor-pointer bg-grey-light hover:bg-grey-lightest p-2" v-for="(event, key) in events" @mouseover="hoverEvent(event)" @click="pinEvent(event)" :class="{
-                                    'bg-grey-lightest': event === pinnedEvent
+                                <li class="cursor-pointer bg-gray-400 hover:bg-gray-100 p-2" v-for="(event, key) in events" @mouseover="hoverEvent(event)" @click="pinEvent(event)" :class="{
+                                    'bg-gray-100': event === pinnedEvent
                                 }">
                                     <div class="flex items-center">
                                         <div class="mr-2 flex items-center">
-                                            <div class="font-mono text-grey-dark pr-2" style="min-width: 25px;">
-                                                <i class="fa fa-thumbtack text-grey" v-if="event === hoveredEvent || event === pinnedEvent"></i>
+                                            <div class="font-mono text-gray-600 pr-2" style="min-width: 25px;">
+                                                <i class="fa fa-thumbtack text-gray-500" v-if="event === hoveredEvent || event === pinnedEvent"></i>
                                                 <span v-else>{{ key+1 }}</span>
                                             </div>
                                             <i class="fa fa-check" :class="{
-                                                'text-green-dark fa-check': ! event.failure,
-                                                'text-red-dark fa-times': event.failure,
+                                                'text-green-600 fa-check': ! event.failure,
+                                                'text-red-600 fa-times': event.failure,
                                             }"></i>
                                         </div>
                                         <span style="min-width: 180px;">{{ event.name }}</span>
@@ -83,7 +83,7 @@
                                             {{ argument }}
                                         </div>
                                     </div>
-                                    <div class="mt-2 w-full text-red-darker" v-if="event.failure">
+                                    <div class="mt-2 w-full text-red-800" v-if="event.failure">
                                         {{ event.failure }}
                                     </div>
                                 </li>
@@ -92,17 +92,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-3/4 bg-grey h-full flex justify-center">
-                <div class="mt-4 flex flex-col shadow-lg" style="width: 1000px; height: 680px;">
-                    <div class="rounded-sm bg-grey-light p-2 h-12 justify-center items-center">
+            <div class="w-3/4 bg-gray-500 h-full flex justify-center">
+                <div class="mt-4 flex flex-col shadow-2xl" style="width: 1000px; height: 680px;">
+                    <div class="rounded-sm bg-gray-400 p-2 h-12 justify-center items-center">
                         <input type="text" class="focus:outline-none h-full w-full font-mono p-2" v-model="activeEvent.path" readonly>
                     </div>
                     <div class="h-full w-full flex flex-col">
                         <iframe ref="iframe" id="iframe" frameborder="0" class="h-full w-full block bg-white overflow-auto"></iframe>
-                        <div class="flex bg-grey-dark text-white rounded-sm h-12 justify-center items-center text-center" v-if="activeEvent">
+                        <div class="flex bg-gray-600 text-white rounded-sm h-12 justify-center items-center text-center" v-if="activeEvent">
                             <span class="mr-4">DOM Snapshot</span>
-                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-black border-grey-light shadow p-2 no-underline" href="#" @click="loadBefore">Before</a>
-                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-black border-grey-light shadow p-2 no-underline" href="#" @click="loadAfter">After</a>
+                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-gray-900 border-gray-400 shadow p-2 no-underline" href="#" @click="loadBefore">Before</a>
+                            <a  v-if="activeEvent.before" class="mx-2 rounded bg-white text-gray-900 border-gray-400 shadow p-2 no-underline" href="#" @click="loadAfter">After</a>
                         </div>
                     </div>
                 </div>
