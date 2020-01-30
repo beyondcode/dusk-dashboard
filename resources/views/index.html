@@ -194,7 +194,11 @@
             },
 
             loadHtml: function(html) {
-                this.$refs.iframe.srcdoc = html;
+                var iframeDocument = window.document.getElementById('iframe').contentWindow.document;
+
+                iframeDocument.open('text/html', 'replace');
+                iframeDocument.write(html);
+                iframeDocument.close();
 
                 setTimeout(function () {
                     this.highlightEvent(this.activeEvent);
