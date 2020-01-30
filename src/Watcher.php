@@ -5,8 +5,8 @@ namespace BeyondCode\DuskDashboard;
 use Closure;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Finder\Finder;
-use Yosymfony\ResourceWatcher\ResourceWatcher;
 use Yosymfony\ResourceWatcher\ResourceCacheMemory;
+use Yosymfony\ResourceWatcher\ResourceWatcher;
 
 class Watcher
 {

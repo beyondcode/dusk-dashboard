@@ -2,9 +2,9 @@
 
 namespace BeyondCode\DuskDashboard\Ratchet;
 
+use BeyondCode\DuskDashboard\DuskProcessFactory;
 use Ratchet\ConnectionInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
-use BeyondCode\DuskDashboard\DuskProcessFactory;
 use Ratchet\WebSocket\MessageComponentInterface;
 
 class Socket implements MessageComponentInterface

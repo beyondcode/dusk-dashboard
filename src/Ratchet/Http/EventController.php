@@ -2,12 +2,12 @@
 
 namespace BeyondCode\DuskDashboard\Ratchet\Http;
 
+use BeyondCode\DuskDashboard\Ratchet\Socket;
 use Exception;
 use GuzzleHttp\Psr7\Response;
-use Ratchet\ConnectionInterface;
 use function GuzzleHttp\Psr7\str;
 use Psr\Http\Message\RequestInterface;
-use BeyondCode\DuskDashboard\Ratchet\Socket;
+use Ratchet\ConnectionInterface;
 
 class EventController extends Controller
 {
