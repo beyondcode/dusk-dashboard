@@ -2,16 +2,16 @@
 
 namespace BeyondCode\DuskDashboard\Testing;
 
-use Closure;
-use Throwable;
-use GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
-use BeyondCode\DuskDashboard\Dusk\Browser;
-use Laravel\Dusk\TestCase as BaseTestCase;
-use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\DesiredCapabilities;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
 use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
+use BeyondCode\DuskDashboard\Dusk\Browser;
+use Closure;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
+use Laravel\Dusk\TestCase as BaseTestCase;
+use Throwable;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -51,7 +51,7 @@ abstract class TestCase extends BaseTestCase
         return class_basename(static::class).'::'.$this->getName();
     }
 
-    protected function enableNetworkLogging(DesiredCapabilities $capabilities) : DesiredCapabilities
+    protected function enableNetworkLogging(DesiredCapabilities $capabilities): DesiredCapabilities
     {
         $chromeOptions = $capabilities->getCapability(ChromeOptions::CAPABILITY);
 

@@ -3,9 +3,9 @@
 namespace BeyondCode\DuskDashboard\Ratchet\Http;
 
 use GuzzleHttp\Psr7\Response;
-use Ratchet\ConnectionInterface;
 use function GuzzleHttp\Psr7\str;
 use Psr\Http\Message\RequestInterface;
+use Ratchet\ConnectionInterface;
 
 class DashboardController extends Controller
 {

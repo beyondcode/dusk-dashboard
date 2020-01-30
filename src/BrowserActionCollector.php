@@ -2,10 +2,10 @@
 
 namespace BeyondCode\DuskDashboard;
 
+use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
+use BeyondCode\DuskDashboard\Dusk\Browser;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use BeyondCode\DuskDashboard\Dusk\Browser;
-use BeyondCode\DuskDashboard\Console\StartDashboardCommand;
 
 class BrowserActionCollector
 {

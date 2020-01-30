@@ -2,19 +2,19 @@
 
 namespace BeyondCode\DuskDashboard\Console;
 
+use BeyondCode\DuskDashboard\DuskProcessFactory;
+use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
+use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
+use BeyondCode\DuskDashboard\Ratchet\Server\App;
+use BeyondCode\DuskDashboard\Ratchet\Socket;
+use BeyondCode\DuskDashboard\Watcher;
 use Clue\React\Buzz\Browser;
 use Illuminate\Console\Command;
 use Ratchet\WebSocket\WsServer;
+use React\EventLoop\Factory as LoopFactory;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Route;
-use BeyondCode\DuskDashboard\Watcher;
-use React\EventLoop\Factory as LoopFactory;
-use BeyondCode\DuskDashboard\Ratchet\Socket;
-use BeyondCode\DuskDashboard\DuskProcessFactory;
-use BeyondCode\DuskDashboard\Ratchet\Server\App;
-use BeyondCode\DuskDashboard\Ratchet\Http\EventController;
-use BeyondCode\DuskDashboard\Ratchet\Http\DashboardController;
 
 class StartDashboardCommand extends Command
 {
@@ -89,10 +89,10 @@ class StartDashboardCommand extends Command
             $client->post('http://127.0.0.1:'.self::PORT.'/events', [
                 'Content-Type' => 'application/json',
             ], json_encode([
-                    'channel' => 'dusk-dashboard',
-                    'name' => 'dusk-reset',
-                    'data' => [],
-                ])
+                'channel' => 'dusk-dashboard',
+                'name' => 'dusk-reset',
+                'data' => [],
+            ])
             );
 
             $process = DuskProcessFactory::make();

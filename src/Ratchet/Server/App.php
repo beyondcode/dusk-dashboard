@@ -6,9 +6,9 @@ use Ratchet\Http\Router;
 use Ratchet\Server\IoServer;
 use React\EventLoop\LoopInterface;
 use React\Socket\Server as Reactor;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 class App extends \Ratchet\App
 {
