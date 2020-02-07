@@ -6,7 +6,7 @@ A beautiful dashboard for your Dusk test suites.
 [![Quality Score](https://img.shields.io/scrutinizer/g/beyondcode/dusk-dashboard.svg?style=flat-square)](https://scrutinizer-ci.com/g/beyondcode/dusk-dashboard)
 [![Total Downloads](https://img.shields.io/packagist/dt/beyondcode/dusk-dashboard.svg?style=flat-square)](https://packagist.org/packages/beyondcode/dusk-dashboard)
 
-![](http://marcelpociot.de/user/pages/blog/introducing-the-laravel-dusk-dashboard/dusk-dashboard.gif)
+![](https://pociot.dev/storage/22/dusk-dashboard.gif)
 
 ## Installation
 
