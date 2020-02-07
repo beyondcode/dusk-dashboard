@@ -33,7 +33,7 @@ use BeyondCode\DuskDashboard\Testing\TestCase as BaseTestCase;
 php artisan dusk:dashboard
 ```
 
-Check out the documentation [here](http://marcelpociot.de/blog/introducing-the-laravel-dusk-dashboard).
+Check out the documentation [here](https://pociot.dev/8-introducing-laravel-dusk-dashboard).
 
 ### Handling Asset Paths
 
