@@ -20,10 +20,10 @@
         "cboden/ratchet": "^0.4.1",
         "clue/buzz-react": "^2.5",
         "guzzlehttp/guzzle": "^6.3",
-        "illuminate/console": "5.6.*|5.7.*|5.8.*|6.*",
-        "illuminate/support": "5.6.*|5.7.*|5.8.*|6.*",
+        "illuminate/console": "5.6.*|5.7.*|5.8.*|6.*|7.*",
+        "illuminate/support": "5.6.*|5.7.*|5.8.*|6.*|7.*",
         "laravel/dusk": "^4.0|^5.0|^6.0",
-        "yosymfony/resource-watcher": "^1.2"
+        "yosymfony/resource-watcher": "^1.2|^2.0"
     },
     "require-dev": {
         "larapack/dd": "^1.0",
