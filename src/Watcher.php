@@ -7,6 +7,7 @@ use React\EventLoop\LoopInterface;
 use Symfony\Component\Finder\Finder;
 use Yosymfony\ResourceWatcher\ResourceCacheMemory;
 use Yosymfony\ResourceWatcher\ResourceWatcher;
+use Yosymfony\ResourceWatcher\Crc32ContentHash;
 
 class Watcher
 {
