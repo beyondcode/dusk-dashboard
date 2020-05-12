@@ -9,7 +9,6 @@ use Yosymfony\ResourceWatcher\Crc32ContentHash;
 use Yosymfony\ResourceWatcher\ResourceCacheMemory;
 use Yosymfony\ResourceWatcher\ResourceWatcher;
 
-
 class Watcher
 {
     /** @var \Symfony\Component\Finder\Finder */
