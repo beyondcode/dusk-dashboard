@@ -29,9 +29,9 @@ class Watcher
         $watcher = new ResourceWatcher(new ResourceCacheMemory(), $this->finder, $hashContent);
 
         $this->loop->addPeriodicTimer(1 / 2, function () use ($watcher, $callback) {
-            $watcher->findChanges();
+            $watcher_result  = $watcher->findChanges();
 
-            if ($watcher->hasChanges()) {
+            if ($watcher_result->hasChanges()) {
                 call_user_func($callback);
             }
         });
