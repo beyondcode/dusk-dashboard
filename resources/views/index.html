@@ -53,6 +53,7 @@
                         <li class="list-group-item" v-for="(events, test) in filteredEvents">
                             <p class="my-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs"
                                @click="expand(test)"
+                               style="white-space: nowrap"
                                :class="{
                                                 'text-green-600': ! events[events.length-1].failure,
                                                 'text-red-600': events[events.length-1].failure,
@@ -62,12 +63,12 @@
                                                 'text-red-600 fa-times': events[events.length-1].failure,
                                             }"></i>
                                 {{ test }}
-                                <span class="fa fa-chevron-down"
-                                      v-show="!isExpanded(test)">
-                                </span>
-                                <span class="fa fa-chevron-up"
-                                      v-show="isExpanded(test)">
-                                </span>
+                                    <i class="fa fa-chevron-down"
+                                          v-show="!isExpanded(test)">
+                                    </i>
+                                    <i class="fa fa-chevron-up"
+                                          v-show="isExpanded(test)">
+                                    </i>
                             </p>
 
                             <ul class="list-reset mr-4 font-mono text-xs"
