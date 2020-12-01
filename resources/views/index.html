@@ -18,8 +18,10 @@
 
             <h4 class="mb-0 ml-3"><strong>Laravel</strong> Dusk Dashboard</h4>
 
-            <button class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
-                Start Tests
+            <button class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-auto mr-3"
+                    @click.prevent="startTests" title="Start Tests">
+                <span v-if="testsRunning">Watching...</span>
+                <span v-else>Start Watching</span>
             </button>
         </div>
         <div class="flex h-full w-full absolute pt-16 pin-t">
@@ -60,6 +62,12 @@
                                                 'text-red-600 fa-times': events[events.length-1].failure,
                                             }"></i>
                                 {{ test }}
+                                <span class="fa fa-chevron-down"
+                                      v-show="!isExpanded(test)">
+                                </span>
+                                <span class="fa fa-chevron-up"
+                                      v-show="isExpanded(test)">
+                                </span>
                             </p>
 
                             <ul class="list-reset mr-4 font-mono text-xs"
@@ -133,6 +141,9 @@
             pinnedEvent: null,
             events: [],
             expanded: [],
+            testsRunning : false,
+            currentTestName : '',
+            timer: null,
         },
 
         computed: {
@@ -204,6 +215,7 @@
             },
 
             startTests: function() {
+                this.testsRunning = true;
                 this.events = [];
 
                 conn.send(JSON.stringify({
@@ -276,6 +288,17 @@
 
             conn.onmessage = (e) => {
                 let message = JSON.parse(e.data);
+console.log(message.data);
+
+                window.clearTimeout(this.timer);
+                this.timer = setTimeout(function() {
+                    alert("Finished");
+                    }, 2000);
+
+if (message.data.test !== this.currentTestName) {
+    console.log("NEW TEST");
+}
+                this.currentTestName = message.data.test;
 
                 if (message.name === 'dusk-event') {
                     this.events.push(message.data);
@@ -283,6 +306,8 @@
                     if (this.pinnedEvent === null) {
                         this.loadEvent(message.data);
                     }
+
+
                 }
 
                 if (message.name === 'dusk-failure') {
