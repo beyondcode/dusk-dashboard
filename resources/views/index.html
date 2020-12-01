@@ -289,16 +289,15 @@
 
             conn.onmessage = (e) => {
                 let message = JSON.parse(e.data);
-console.log(message.data);
 
                 window.clearTimeout(this.timer);
                 this.timer = setTimeout(function() {
                     alert("Finished");
                     }, 2000);
 
-if (message.data.test !== this.currentTestName) {
-    console.log("NEW TEST");
-}
+                if (message.data.test !== this.currentTestName) {
+                    // new test has started
+                }
                 this.currentTestName = message.data.test;
 
                 if (message.name === 'dusk-event') {
