@@ -18,8 +18,10 @@
 
             <h4 class="mb-0 ml-3"><strong>Laravel</strong> Dusk Dashboard</h4>
 
-            <button class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-auto mr-3" @click.prevent="startTests" title="Start Tests">
-                Start Tests
+            <button class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-auto mr-3"
+                    @click.prevent="startTests" title="Start Tests">
+                <span v-if="testsRunning">Watching...</span>
+                <span v-else>Start Watching</span>
             </button>
         </div>
         <div class="flex h-full w-full absolute pt-16 pin-t">
@@ -49,7 +51,10 @@
 
                     <ul class="list-reset">
                         <li class="list-group-item" v-for="(events, test) in filteredEvents">
-                            <p class="my-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs" :class="{
+                            <p class="my-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs"
+                               @click="expand(test)"
+                               style="white-space: nowrap"
+                               :class="{
                                                 'text-green-600': ! events[events.length-1].failure,
                                                 'text-red-600': events[events.length-1].failure,
                                             }">
@@ -58,12 +63,21 @@
                                                 'text-red-600 fa-times': events[events.length-1].failure,
                                             }"></i>
                                 {{ test }}
+                                    <i class="fa fa-chevron-down"
+                                          v-show="!isExpanded(test)">
+                                    </i>
+                                    <i class="fa fa-chevron-up"
+                                          v-show="isExpanded(test)">
+                                    </i>
                             </p>
 
-                            <ul class="list-reset mr-4 font-mono text-xs">
-                                <li class="cursor-pointer bg-gray-400 hover:bg-gray-100 p-2" v-for="(event, key) in events" @mouseover="hoverEvent(event)" @click="pinEvent(event)" :class="{
-                                    'bg-gray-100': event === pinnedEvent
-                                }">
+                            <ul class="list-reset mr-4 font-mono text-xs"
+                                v-show="isExpanded(test)">
+                                <li class="cursor-pointer bg-gray-400 hover:bg-gray-100 p-2"
+                                    v-for="(event, key) in events"
+                                    @mouseover="hoverEvent(event)"
+                                    @click="pinEvent(event)"
+                                    :class="{'bg-gray-100': event === pinnedEvent}">
                                     <div class="flex items-center">
                                         <div class="mr-2 flex items-center">
                                             <div class="font-mono text-gray-600 pr-2" style="min-width: 25px;">
@@ -127,6 +141,10 @@
             hoveredEvent: null,
             pinnedEvent: null,
             events: [],
+            expanded: [],
+            testsRunning : false,
+            currentTestName : '',
+            timer: null,
         },
 
         computed: {
@@ -157,6 +175,26 @@
         },
 
         methods: {
+            expand(key) {
+                if (!this.expanded.includes(key)) {
+                    this.expanded.push(key);
+                } else {
+                    for( var i = 0; i < this.expanded.length; i++){
+                        if ( this.expanded[i] === key) {
+                            this.expanded.splice(i, 1);
+                        }
+                    }
+                }
+            },
+
+            isExpanded(key)
+            {
+                if (this.expanded.includes(key)) {
+                    return true
+                }
+                return false;
+            },
+
             hoverEvent: function(event) {
                 this.hoveredEvent = event;
             },
@@ -178,6 +216,7 @@
             },
 
             startTests: function() {
+                this.testsRunning = true;
                 this.events = [];
 
                 conn.send(JSON.stringify({
@@ -251,12 +290,24 @@
             conn.onmessage = (e) => {
                 let message = JSON.parse(e.data);
 
+                window.clearTimeout(this.timer);
+                this.timer = setTimeout(function() {
+                    alert("Finished");
+                    }, 2000);
+
+                if (message.data.test !== this.currentTestName) {
+                    // new test has started
+                }
+                this.currentTestName = message.data.test;
+
                 if (message.name === 'dusk-event') {
                     this.events.push(message.data);
 
                     if (this.pinnedEvent === null) {
                         this.loadEvent(message.data);
                     }
+
+
                 }
 
                 if (message.name === 'dusk-failure') {
