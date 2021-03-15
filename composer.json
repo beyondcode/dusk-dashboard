@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^8.0",
         "cboden/ratchet": "^0.4.1",
         "clue/buzz-react": "^2.5",
         "guzzlehttp/guzzle": "^7.0.1",
