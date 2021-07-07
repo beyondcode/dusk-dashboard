@@ -2,6 +2,7 @@
 
 namespace BeyondCode\DuskDashboard\Dusk;
 
+use Closure;
 use BeyondCode\DuskDashboard\BrowserActionCollector;
 
 class Browser extends \Laravel\Dusk\Browser
@@ -59,6 +60,28 @@ class Browser extends \Laravel\Dusk\Browser
         $this->actionCollector->collect(__FUNCTION__, func_get_args(), $this);
 
         return $browser;
+    }
+
+    /** {@inheritdoc} */
+    public function with($selector, Closure $callback)
+    {
+        $action_collector_callback = function ($browser) use ($callback) {
+            $browser->setActionCollector($this->getActionCollector());
+
+            return $callback($browser);
+        };
+
+        return parent::with($selector, $action_collector_callback);
+    }
+
+    /** {@inheritdoc} */
+    public function onComponent($component, $parentResolver)
+    {
+        if ($this->getActionCollector() === null) {
+            $this->setActionCollector(new BrowserActionCollector('dog'));
+        }
+
+        parent::onComponent($component, $parentResolver);
     }
 
     public function getCurrentPageSource()
